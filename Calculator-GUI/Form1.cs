@@ -17,6 +17,8 @@ namespace Calculator_GUI
         List<int> inputtedNumber = new List<int>(); //this list takes the numbers from the numpad that the user inputs and saves them.
 
         //TODO: Make inputtedNumber use int32, and then output label converts to string.
+        //TODO: check if List<T>.Insert pushes or overwrites data. Calculate() is messed up. 
+        //TODO: rewrite case '=' in Calculate(). It's broken. 
 
         List<int> savedNumbers = new List<int>();   //this list contains formatted numbers the computer can use in calculations. these numbers are derived from the inputtedNumber by essentially concatenating all the numbers. 
         List<char> pendingOperations = new List<char>();    //this list contains the operations that need to be conducted. The idea behind this is that item 0 of saved numbers will have a corresponding operation at item 0 of this list. Upon clicking equals, the computer will load the first operation, i.e. add, and then load the first and second numbers. it will then perform that operation. then, if there is another operation, it will load the output of the previous operation, and perform it with the next saved number. this chain will repeat until there are no more operations to carry out. 
@@ -79,7 +81,15 @@ namespace Calculator_GUI
 
                 }
 
-                int numToAdd = Int32.Parse(concatList);
+                int numToAdd;
+                if (concatList != "")
+                {
+                    numToAdd = Int32.Parse(concatList);
+
+                } else
+                {
+                    numToAdd = 0;
+                }
                 savedNumbers.Add(numToAdd); //saves formatted number from inputtedNumber and saves it in SavedNumbers for calculation later.
                 pendingOperations.Add('='); //saves operation to the op list for calculation later, in this case the final operation.
                 inputtedNumber.Clear(); 
@@ -111,6 +121,10 @@ namespace Calculator_GUI
                             output.Text = Convert.ToString(workingNumber);
                             savedNumbers.Clear();
                             savedNumbers.Add(workingNumber);    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
+                            inputtedNumber.Clear();
+                            pendingOperations.Clear();
+                            
+                            
                             output.Refresh();
                             return;
 
@@ -134,7 +148,16 @@ namespace Calculator_GUI
 
                 }
 
-                int numToAdd = Int32.Parse(concatList);
+                int numToAdd;
+                if (concatList != "")
+                {
+                    numToAdd = Int32.Parse(concatList);
+
+                }
+                else
+                {
+                    numToAdd = 0;
+                }
                 savedNumbers.Add(numToAdd); //saves formatted number from inputtedNumber and saves it in SavedNumbers for calculation later.
                 pendingOperations.Add('+'); //saves operation to the op list for calculation later.
                 inputtedNumber.Clear();
@@ -312,7 +335,7 @@ namespace Calculator_GUI
         }
         private void label1_Click(object sender, EventArgs e)
         {
-            //do nothing on label click, this should only be used for outputting numbers. 
+            //do nothing on label click, this should only be used for outputting numbers. possibly could be used as a clear function. 
             return;
         }
     }
