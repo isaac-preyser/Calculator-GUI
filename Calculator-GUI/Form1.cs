@@ -16,8 +16,8 @@ namespace Calculator_GUI
         //lists that save numbers for the calculator. the first one saves the inputted numbers, the second saves the saved numbers after an operation has been selected. 
         List<int> inputtedNumber = new List<int>(); //this list takes the numbers from the numpad that the user inputs and saves them.
 
-        //TODO: Make inputtedNumber use int32, and then output label converts to string.
-        //TODO: check if List<T>.Insert pushes or overwrites data. Calculate() is messed up. 
+        //TODO: **DONE**    Make inputtedNumber use int32, and then output label converts to string. 
+        //TODO: check if List<T>.Insert pushes or overwrites data. Calculate() is messed up.    *Note* it pushes data. I need to delete the entry and then insert in that location. 
         //TODO: rewrite case '=' in Calculate(). It's broken. 
 
         List<int> savedNumbers = new List<int>();   //this list contains formatted numbers the computer can use in calculations. these numbers are derived from the inputtedNumber by essentially concatenating all the numbers. 
@@ -103,18 +103,22 @@ namespace Calculator_GUI
                     {
                         case '+':
                             workingNumber = savedNumbers[a] + savedNumbers[b];
+                            savedNumbers.Remove(b);
                             savedNumbers.Insert(b, workingNumber); //insert now worked on number in the location of b, which will be a on the next time through. This allows for operations such as 4 + 5 + 6, by going 4 + 5 = 9, and then 9 + 6 = 15.
                             break;
                         case '-':
                             workingNumber = savedNumbers[a] - savedNumbers[b];
+                            savedNumbers.Remove(b);
                             savedNumbers.Insert(b, workingNumber);
                             break;
                         case 'x':
                             workingNumber = savedNumbers[a] * savedNumbers[b];
+                            savedNumbers.Remove(b);
                             savedNumbers.Insert(b, workingNumber);
                             break;
                         case '/':
                             workingNumber = savedNumbers[a] / savedNumbers[b];
+                            savedNumbers.Remove(b);
                             savedNumbers.Insert(b, workingNumber);
                             break;
                         case '=': 
@@ -292,6 +296,7 @@ namespace Calculator_GUI
             output.Text = $"{op}";
             output.Refresh();
             Calculate(op);
+            Console.WriteLine("equals done"); //done for debugging, remove later. 
             
 
 
@@ -305,6 +310,7 @@ namespace Calculator_GUI
             output.Text = $"{op}";
             output.Refresh();
             Calculate(op);
+            Console.WriteLine("add done"); //done for debugging, remove later. 
         }
 
         private void operSubtract_Click(object sender, EventArgs e)
@@ -314,6 +320,7 @@ namespace Calculator_GUI
 
             output.Text = $"{op}";
             output.Refresh();
+            Console.WriteLine("subtract done"); //done for debugging, remove later. 
         }
 
         private void operMult_Click(object sender, EventArgs e)
@@ -323,6 +330,7 @@ namespace Calculator_GUI
             
             output.Text = $"{op}";
             output.Refresh();
+            Console.WriteLine("multiply done"); //done for debugging, remove later. 
         }
         private void operDiv_Click(object sender, EventArgs e)
         {
@@ -332,6 +340,7 @@ namespace Calculator_GUI
             
             output.Text = $"{op}";
             output.Refresh();
+            Console.WriteLine("divide done"); //done for debugging, remove later. 
         }
         private void label1_Click(object sender, EventArgs e)
         {
