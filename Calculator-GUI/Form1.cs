@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 
 namespace Calculator_GUI
@@ -61,38 +62,68 @@ namespace Calculator_GUI
 
         }
 
+        public void ParseNumber(char oper)
+        {
+            string concatList = ""; //this is to smush all the numbers together into one string, to then be parsed into a proper number. 
+            
+            foreach (var value in inputtedNumber)
+            {
+                concatList += Convert.ToString(value);
+
+            }
+
+            int numToAdd;
+            if (concatList != "")
+            {
+                numToAdd = Int32.Parse(concatList);
+
+            }
+            else if (savedNumbers.Count < 1)
+            {
+               
+                //this is the part that is breaking the program. calculating again, using a saved value from previous op, using the output of the previous eqaution,
+                //the input list is empty- injecting a zero into the saved numbers list when there shouldn't be. 
+                
+                numToAdd = 0; //only runs if inputList is empty- e.g. if user doesnt input and then clicks calculate.
+            }
+            savedNumbers.Add(numToAdd); //saves formatted number from inputtedNumber and saves it in SavedNumbers for calculation later.
+            pendingOperations.Add(oper); //saves operation to the op list for calculation later, in this case the final operation.
+            inputtedNumber.Clear();
+        }
+
+
         public void Calculate(char oper)
         {
             //this method is to be run if the cache method detects an operator; this method will detect which operator it is, and point it to the correct operation. This method will also store the inputted number as one, to be properly manipulated by the System.Math class. 
+
+
+            /*
+             * Design for Calculate()-
+             *  initalize working number, for calculations later
+             *  run ParseNumber(), which turns the list of characters in inputtedNumber into a string and then into an integer in savedNumbers. It also saves the appropriate operation to the pendingOperations list, at the corresponding index. 
+             *
+             *  for each saved value in pendingOperations:  
+             *                                              initalize vars a and b, they serve as the pointers that tell the computer to look at a certain index of both lists. 
+             *                                              they help keep track of where the output of our work goes.
+             *                                              enter into a switch statement, where the character value of var value (the current location in pendingOperations we are)
+             *                                              is read, and the corresponding operation based on the symbol is carried out.
+             *                                              next, remove the saved value at index b. (this will become location a for the next run through.)
+             *                                              save the output of the work carried out previously at index b.
+             *                                              repeat this until case '=' is true, where the current output of the last operation is displayed, and the loop is stopped. Following this, clear all lists and save the worked number at index 0 of next savednumbers. 
+             * 
+             * 
+             * 
+             * 
+             */
 
             //as of right now, this method is broken.
 
             int workingNumber = 0;
 
-            string concatList = ""; //this is to smush all the numbers together into one string, to then be parsed into a proper number. 
-
-
-
+            
+            
             if (oper == '=')
             {
-                foreach (var value in inputtedNumber)
-                {
-                    concatList += Convert.ToString(value);
-
-                }
-
-                int numToAdd;
-                if (concatList != "")
-                {
-                    numToAdd = Int32.Parse(concatList);
-
-                } else
-                {
-                    numToAdd = 0;
-                }
-                savedNumbers.Add(numToAdd); //saves formatted number from inputtedNumber and saves it in SavedNumbers for calculation later.
-                pendingOperations.Add('='); //saves operation to the op list for calculation later, in this case the final operation.
-                inputtedNumber.Clear(); 
 
                 foreach (var value in pendingOperations)
                 {
@@ -126,68 +157,15 @@ namespace Calculator_GUI
                             savedNumbers.Clear();
                             savedNumbers.Add(workingNumber);    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
                             inputtedNumber.Clear();
-                            pendingOperations.Clear();
-                            
-                            
                             output.Refresh();
-                            return;
-
-
+                            break;
 
                     }
-
-
-
-
-
                 }
                 return;
             }
 
-            if (oper == '+')
-            {
-                foreach (var value in inputtedNumber)
-                {
-                    concatList += Convert.ToString(value);
-
-                }
-
-                int numToAdd;
-                if (concatList != "")
-                {
-                    numToAdd = Int32.Parse(concatList);
-
-                }
-                else
-                {
-                    numToAdd = 0;
-                }
-                savedNumbers.Add(numToAdd); //saves formatted number from inputtedNumber and saves it in SavedNumbers for calculation later.
-                pendingOperations.Add('+'); //saves operation to the op list for calculation later.
-                inputtedNumber.Clear();
-                return;
-
-            }
-
-
-            if (oper == '-')
-            {
-                return;
-            }
-
-
-            if (oper == 'x')
-            {
-                return;
-            }
-
-            if (oper == '/')
-            {
-                return; 
-            } else
-            {
-                throw new Exception("the inputted operation was has not been coded yet, or the operation is not possible");
-            }
+           
         }
 
 
@@ -295,9 +273,10 @@ namespace Calculator_GUI
 
             output.Text = $"{op}";
             output.Refresh();
+            ParseNumber(op);
             Calculate(op);
+            pendingOperations.Clear(); //has to be done after the foreach loop that depends on pendingOperations, to be safe. 
             Console.WriteLine("equals done"); //done for debugging, remove later. 
-            
 
 
         }
@@ -309,7 +288,7 @@ namespace Calculator_GUI
 
             output.Text = $"{op}";
             output.Refresh();
-            Calculate(op);
+            ParseNumber(op);
             Console.WriteLine("add done"); //done for debugging, remove later. 
         }
 
@@ -320,6 +299,7 @@ namespace Calculator_GUI
 
             output.Text = $"{op}";
             output.Refresh();
+            ParseNumber(op);
             Console.WriteLine("subtract done"); //done for debugging, remove later. 
         }
 
@@ -330,6 +310,7 @@ namespace Calculator_GUI
             
             output.Text = $"{op}";
             output.Refresh();
+            ParseNumber(op);
             Console.WriteLine("multiply done"); //done for debugging, remove later. 
         }
         private void operDiv_Click(object sender, EventArgs e)
@@ -340,6 +321,7 @@ namespace Calculator_GUI
             
             output.Text = $"{op}";
             output.Refresh();
+            ParseNumber(op);
             Console.WriteLine("divide done"); //done for debugging, remove later. 
         }
         private void label1_Click(object sender, EventArgs e)
