@@ -21,8 +21,14 @@ namespace Calculator_GUI
         //TODO: check if List<T>.Insert pushes or overwrites data. Calculate() is messed up.    *Note* it pushes data. I need to delete the entry and then insert in that location. **DONE**
         //TODO: rewrite case '=' in Calculate(). It's broken. **FIXED**
         //TODO: make output a rounded float, so then outputs can be decimals. **DONE**
+       
+        
+        //-----^^ DONE ^^---------- vv TODO vv --------------------------
+        
         //TODO: add a 'C' button to clear the memory of the calculator. 
         //TODO add extended math functions. 
+        //TODO add negative number identifier to allow for the input of negative numbers. 
+        //POSSIBILTITY: Look at reconfiguring the list to hold tuples, that then hold numbers along with their respective ops. This would increase performance, as it would cut the time looking in the lists. However, no person in their right mind is going to try to shove a billion operations down the program in one go, thus reducing the benefits of cutting the big O notation down. 
 
 
 
