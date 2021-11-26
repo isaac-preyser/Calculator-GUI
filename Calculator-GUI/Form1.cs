@@ -15,16 +15,18 @@ namespace Calculator_GUI
     public partial class Form1 : Form
     {
         //lists that save numbers for the calculator. the first one saves the inputted numbers, the second saves the saved numbers after an operation has been selected. 
-        List<int> inputtedNumber = new List<int>(); //this list takes the numbers from the numpad that the user inputs and saves them.
+        List<float> inputtedNumber = new List<float>(); //this list takes the numbers from the numpad that the user inputs and saves them.
 
         //TODO: **DONE**    Make inputtedNumber use int32, and then output label converts to string. 
         //TODO: check if List<T>.Insert pushes or overwrites data. Calculate() is messed up.    *Note* it pushes data. I need to delete the entry and then insert in that location. **DONE**
         //TODO: rewrite case '=' in Calculate(). It's broken. **FIXED**
-        //TODO: make output a rounded float, so then outputs can be decimals. 
+        //TODO: make output a rounded float, so then outputs can be decimals. **DONE**
+        //TODO: add a 'C' button to clear the memory of the calculator. 
+        //TODO add extended math functions. 
 
 
 
-        List<int> savedNumbers = new List<int>();   //this list contains formatted numbers the computer can use in calculations. these numbers are derived from the inputtedNumber by essentially concatenating all the numbers. 
+        List<float> savedNumbers = new List<float>();   //this list contains formatted numbers the computer can use in calculations. these numbers are derived from the inputtedNumber by essentially concatenating all the numbers. 
         List<char> pendingOperations = new List<char>();    //this list contains the operations that need to be conducted. The idea behind this is that item 0 of saved numbers will have a corresponding operation at item 0 of this list. Upon clicking equals, the computer will load the first operation, i.e. add, and then load the first and second numbers. it will then perform that operation. then, if there is another operation, it will load the output of the previous operation, and perform it with the next saved number. this chain will repeat until there are no more operations to carry out. 
 
         //should look like: 
@@ -44,7 +46,7 @@ namespace Calculator_GUI
          */
 
 
-        public List<int> Cache(int input)
+        public List<float> Cache(float input)
         {
 
 
@@ -77,11 +79,11 @@ namespace Calculator_GUI
 
             }
 
-            int numToAdd = 0;
+            float numToAdd = 0;
 
             if (concatList != "")
             {
-                numToAdd = Int32.Parse(concatList);
+                numToAdd = Single.Parse(concatList);
 
                 numListCheck = true;    //checks if this code has been run, so numbers don't get written if there is no number passed into the method. 
 
@@ -122,7 +124,7 @@ namespace Calculator_GUI
 
             //as of right now, this method is broken.
 
-            int workingNumber = 0;
+            float workingNumber = 0;
 
             
             
@@ -184,7 +186,7 @@ namespace Calculator_GUI
         private void button1_Click(object sender, EventArgs e)
         {
             //Local vars.. 
-            int number = 1;
+            float number = 1;
 
 
             //this is button one. winforms messed up and named this the wrong thing. 
@@ -198,7 +200,7 @@ namespace Calculator_GUI
         private void button1_Click_1(object sender, EventArgs e)
         {
             //local vars
-            int number = 2;
+            float number = 2;
 
             //this is button 2. same issue as above.
             Cache(number);
@@ -206,7 +208,7 @@ namespace Calculator_GUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int number = 3;
+            float number = 3;
 
             //button 3
             Cache(number);
@@ -215,7 +217,7 @@ namespace Calculator_GUI
         private void nmbr4_Click(object sender, EventArgs e)
         {
 
-            int number = 4;
+            float number = 4;
 
             //button 4
             Cache(number);
@@ -224,7 +226,7 @@ namespace Calculator_GUI
         private void nmbr5_Click(object sender, EventArgs e)
         {
 
-            int number = 5;
+            float number = 5;
 
             //button 5
             Cache(number);
@@ -233,7 +235,7 @@ namespace Calculator_GUI
         private void nmbr6_Click(object sender, EventArgs e)
         {
             //local vars
-            int number = 6;
+            float number = 6;
 
             Cache(number);
         }
@@ -241,7 +243,7 @@ namespace Calculator_GUI
         private void nmbr7_Click(object sender, EventArgs e)
         {
             //local vars
-            int number = 7;
+            float number = 7;
 
             Cache(number);
         }
@@ -249,7 +251,7 @@ namespace Calculator_GUI
         private void nmbr8_Click(object sender, EventArgs e)
         {
             //local vars
-            int number = 8;
+            float number = 8;
 
             Cache(number);
         }
@@ -257,7 +259,7 @@ namespace Calculator_GUI
         private void nmbr9_Click(object sender, EventArgs e)
         {
             //local vars 
-            int number = 9;
+            float number = 9;
 
             Cache(number);
         }
@@ -265,7 +267,7 @@ namespace Calculator_GUI
         private void nmbr0_Click(object sender, EventArgs e)
         {
             //local vars 
-            int number = 0;
+            float number = 0;
 
             Cache(number);
         }
