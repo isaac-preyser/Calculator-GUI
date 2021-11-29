@@ -1,5 +1,5 @@
 ## Welcome to Calculator-GUI!
-This is simply a basic calculator, that runs on Windows platforms. 
+This is simply a basic calculator that runs on Windows platforms. 
 
 So far, the following features have been implemented: 
 
