@@ -1,11 +1,18 @@
 ﻿
         //TODO: **DONE**    Make inputtedNumber use int32, and then output label converts to string. 
+        
         //TODO: check if List<T>.Insert pushes or overwrites data. Calculate() is messed up.    *Note* it pushes data. I need to delete the entry and then insert in that location. **DONE**
+        
         //TODO: rewrite case '=' in Calculate(). It's broken. **FIXED**
+        
         //TODO: make output a rounded float, so then outputs can be decimals. **DONE**
+        
         //NOTE: Visual Studio 2022's auto code completion is extremely more intuitive than VS2019. I'd highly recommend upgrading to it. 
+        
         //TODO: add a 'C' button to clear the memory of the calculator. **DONE**
+       
         //TODO: consider automatically clearing saved number if an op is not inputted after a result. same with clear(), and how it outputs "cleared", and when the user inputs the next info, it concatenates onto "cleared" instead of clearing the message. This could be achieved with a bool that is tripped after completing an op, and checks everytime a number is inputted. e.g. 
+       
         /*
          * Complete Op- save output to index 0 of saved nums
          * set bool clrOnNewNum to true (make this a global var, or the equivalent in c# so it can be checked everywhere)
@@ -16,11 +23,14 @@
          *      carry on w/ normal output
          *      
          *      **DONE**
-         */
+         */ 
+        
+        //TODO add negative number identifier to allow for the input of negative numbers. **DONE**
+
         //-----^^ DONE ^^---------- vv TODO vv --------------------------
         
         //TODO add extended math functions. 
-        //TODO add negative number identifier to allow for the input of negative numbers. 
+
         //TODO make said identifier toggleable by the user- e.g. allow the user to turn it on, and reset it without having the click CLR. 
         //POSSIBILTITY: Look at reconfiguring the list to hold tuples, that then hold numbers along with their respective ops. This would increase performance, as it would cut the time looking in the lists. However, no person in their right mind is going to try to shove a billion operations down the program in one go, thus reducing the benefits of cutting the big O notation down. This also would increase reliability, as it would reduce the likelihood that an extra number or op gets put into the list. 
 using System;
@@ -156,6 +166,15 @@ namespace Calculator_GUI
 
             float workingNumber = 0;
 
+            if (pendingOperations.Count > savedNumbers.Count)
+            {
+                int amtOfFillNeeded = pendingOperations.Count - savedNumbers.Count;
+                for (int i = 0; i < amtOfFillNeeded; i++)
+                {
+                    savedNumbers.Add(0);
+                }
+            }
+
 
 
             if (oper == '=')
@@ -194,7 +213,10 @@ namespace Calculator_GUI
                             savedNumbers.Add(workingNumber);    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
                             inputtedNumber.Clear();
                             output.Refresh();
-                            clrOnNum = true;
+                            clrOnNum = true; //setup for auto-clearing if user begins inputting a new calculation immediately. 
+                            //reset neg number button
+                            isNumNeg = false;
+                            negButton.BackColor = Color.Transparent;
                             break;
 
                     }
@@ -479,18 +501,47 @@ namespace Calculator_GUI
             output.Text = "Cleared.";
             output.Refresh();
             clrOnNum = true;
+            //reset neg number button
+            isNumNeg = false;
+            negButton.BackColor = Color.Transparent;
         }
 
         private void negButton_Click(object sender, EventArgs e)
         {
             if (isNumNeg == true)
             {
+             
                 isNumNeg = false;
                 negButton.BackColor = Color.Transparent;
-                output.Text.TrimStart('-');
+                string source = output.Text;
+                string replacement = source.TrimStart('-');
+                output.Text = replacement;
                 output.Refresh();
             } else
-            {
+            {  
+                //time to write some terrible code that may or may not work
+                if (inputtedNumber.Count == 0 && savedNumbers[0] < 0)
+                {
+                    //this makes a negative number positive. 
+                    savedNumbers[0] *= -1; //this should only activate if an output has been delivered, and the user wants to invert it. 
+                    Console.WriteLine("Inverted!"); //done for debugging, remove later.
+                    isNumNeg = false;
+                    negButton.BackColor = Color.Transparent;
+                    output.Text = Convert.ToString(savedNumbers[0]);
+                    output.Refresh();
+                    return; //do not run below code. 
+                }
+                if (inputtedNumber.Count == 0 && savedNumbers[0] > 0) /*  a continuation of the above shoddy code  */
+                {
+                    //this makes a positive number positive. 
+                    savedNumbers[0] *= -1; //this should only activate if an output has been delivered, and the user wants to invert it.
+                    Console.WriteLine("Inverted!"); //done for debugging, remove later.
+                    isNumNeg = false;   //DO NOT SET THIS TO TRUE! or else it will force the next inputted number to be inverted. 
+                    negButton.BackColor = Color.LightGray; //however, light up the neg button to give the user the illusion they did something. 
+                    output.Text = Convert.ToString(savedNumbers[0]);
+                    output.Refresh();
+                    return; //don't run below code. 
+                }
                 isNumNeg = true;
                 negButton.BackColor = Color.LightGray;
                 output.Text = "-" + output.Text;
