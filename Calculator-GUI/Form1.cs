@@ -1,4 +1,29 @@
-﻿using System;
+﻿
+        //TODO: **DONE**    Make inputtedNumber use int32, and then output label converts to string. 
+        //TODO: check if List<T>.Insert pushes or overwrites data. Calculate() is messed up.    *Note* it pushes data. I need to delete the entry and then insert in that location. **DONE**
+        //TODO: rewrite case '=' in Calculate(). It's broken. **FIXED**
+        //TODO: make output a rounded float, so then outputs can be decimals. **DONE**
+        //NOTE: Visual Studio 2022's auto code completion is extremely more intuitive than VS2019. I'd highly recommend upgrading to it. 
+        //TODO: add a 'C' button to clear the memory of the calculator. **DONE**
+        //TODO: consider automatically clearing saved number if an op is not inputted after a result. same with clear(), and how it outputs "cleared", and when the user inputs the next info, it concatenates onto "cleared" instead of clearing the message. This could be achieved with a bool that is tripped after completing an op, and checks everytime a number is inputted. e.g. 
+        /*
+         * Complete Op- save output to index 0 of saved nums
+         * set bool clrOnNewNum to true (make this a global var, or the equivalent in c# so it can be checked everywhere)
+         * check on input of new digits if clrOnNewNum is true
+         * if true:
+         *      clear lists
+         *      clear output.label
+         *      carry on w/ normal output
+         *      
+         *      **DONE**
+         */
+        //-----^^ DONE ^^---------- vv TODO vv --------------------------
+        
+        //TODO add extended math functions. 
+        //TODO add negative number identifier to allow for the input of negative numbers. 
+        //TODO make said identifier toggleable by the user- e.g. allow the user to turn it on, and reset it without having the click CLR. 
+        //POSSIBILTITY: Look at reconfiguring the list to hold tuples, that then hold numbers along with their respective ops. This would increase performance, as it would cut the time looking in the lists. However, no person in their right mind is going to try to shove a billion operations down the program in one go, thus reducing the benefits of cutting the big O notation down. This also would increase reliability, as it would reduce the likelihood that an extra number or op gets put into the list. 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,28 +37,19 @@ using System.Threading;
 
 namespace Calculator_GUI
 {
-    public partial class Form1 : Form
+    public partial class CalcWindow : Form
     {
+
+
+
         //lists that save numbers for the calculator. the first one saves the inputted numbers, the second saves the saved numbers after an operation has been selected. 
         List<float> inputtedNumber = new List<float>(); //this list takes the numbers from the numpad that the user inputs and saves them.
-
-        //TODO: **DONE**    Make inputtedNumber use int32, and then output label converts to string. 
-        //TODO: check if List<T>.Insert pushes or overwrites data. Calculate() is messed up.    *Note* it pushes data. I need to delete the entry and then insert in that location. **DONE**
-        //TODO: rewrite case '=' in Calculate(). It's broken. **FIXED**
-        //TODO: make output a rounded float, so then outputs can be decimals. **DONE**
-       
-        
-        //-----^^ DONE ^^---------- vv TODO vv --------------------------
-        
-        //TODO: add a 'C' button to clear the memory of the calculator. 
-        //TODO add extended math functions. 
-        //TODO add negative number identifier to allow for the input of negative numbers. 
-        //POSSIBILTITY: Look at reconfiguring the list to hold tuples, that then hold numbers along with their respective ops. This would increase performance, as it would cut the time looking in the lists. However, no person in their right mind is going to try to shove a billion operations down the program in one go, thus reducing the benefits of cutting the big O notation down. 
-
-
-
         List<float> savedNumbers = new List<float>();   //this list contains formatted numbers the computer can use in calculations. these numbers are derived from the inputtedNumber by essentially concatenating all the numbers. 
         List<char> pendingOperations = new List<char>();    //this list contains the operations that need to be conducted. The idea behind this is that item 0 of saved numbers will have a corresponding operation at item 0 of this list. Upon clicking equals, the computer will load the first operation, i.e. add, and then load the first and second numbers. it will then perform that operation. then, if there is another operation, it will load the output of the previous operation, and perform it with the next saved number. this chain will repeat until there are no more operations to carry out. 
+
+        bool clrOnNum = false;
+
+        bool isNumNeg = false; //used to check if the negative number button has been clicked. 
 
         //should look like: 
         /*
@@ -54,7 +70,7 @@ namespace Calculator_GUI
 
         public List<float> Cache(float input)
         {
-
+            clrOnNum = false; //reset clear on num
 
             //create list
             
@@ -75,6 +91,8 @@ namespace Calculator_GUI
 
         public void ParseNumber(char oper)
         {
+            clrOnNum = false; //reset clrOnNum
+
             string concatList = ""; //this is to smush all the numbers together into one string, to then be parsed into a proper number. 
 
             bool numListCheck = false;
@@ -94,6 +112,12 @@ namespace Calculator_GUI
                 numListCheck = true;    //checks if this code has been run, so numbers don't get written if there is no number passed into the method. 
 
             }
+            if (isNumNeg == true) 
+            { 
+                numToAdd *= -1; 
+                isNumNeg = false;   
+            }
+            
             if (numListCheck == true)
             {
                 savedNumbers.Add(numToAdd); //saves formatted number from inputtedNumber and saves it in SavedNumbers for calculation later.
@@ -132,8 +156,8 @@ namespace Calculator_GUI
 
             float workingNumber = 0;
 
-            
-            
+
+
             if (oper == '=')
             {
 
@@ -164,12 +188,13 @@ namespace Calculator_GUI
                             savedNumbers.Remove(b);
                             savedNumbers.Insert(b, workingNumber);
                             break;
-                        case '=': 
+                        case '=':
                             output.Text = Convert.ToString(workingNumber);
                             savedNumbers.Clear();
                             savedNumbers.Add(workingNumber);    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
                             inputtedNumber.Clear();
                             output.Refresh();
+                            clrOnNum = true;
                             break;
 
                     }
@@ -177,13 +202,13 @@ namespace Calculator_GUI
                 return;
             }
 
-           
+
         }
 
 
 
 
-        public Form1()
+        public CalcWindow()
         {
             InitializeComponent();
             output.Text = "";
@@ -192,10 +217,21 @@ namespace Calculator_GUI
         private void button1_Click(object sender, EventArgs e)
         {
             //Local vars.. 
-            float number = 1;
+            float number = 1; //not sure if these should really be stored as floats honestly. This might use more memory than is really needed. 
 
 
             //this is button one. winforms messed up and named this the wrong thing. 
+
+            //clears the lists and resets the output box if user inputs a number instead of an op when the number is saved after the next operation. (so the user can go 3 + 3 = 6, + 4 = 10. however if the user goes 3 + 3 = 6, then inputs 3 + 4, it won't output 67.)
+            if(clrOnNum == true)
+            {
+                inputtedNumber.Clear();
+                savedNumbers.Clear();
+                pendingOperations.Clear();
+                output.Text = "";
+                output.Refresh();
+            }
+
 
             Cache(number);
 
@@ -208,7 +244,19 @@ namespace Calculator_GUI
             //local vars
             float number = 2;
 
+
+
             //this is button 2. same issue as above.
+
+            if (clrOnNum == true)
+            {
+                inputtedNumber.Clear();
+                savedNumbers.Clear();
+                pendingOperations.Clear();
+                output.Text = "";
+                output.Refresh();
+            }
+
             Cache(number);
         }
 
@@ -217,6 +265,16 @@ namespace Calculator_GUI
             float number = 3;
 
             //button 3
+
+            if (clrOnNum == true)
+            {
+                inputtedNumber.Clear();
+                savedNumbers.Clear();
+                pendingOperations.Clear();
+                output.Text = "";
+                output.Refresh();
+            }
+
             Cache(number);
         }
 
@@ -226,6 +284,16 @@ namespace Calculator_GUI
             float number = 4;
 
             //button 4
+
+            if (clrOnNum == true)
+            {
+                inputtedNumber.Clear();
+                savedNumbers.Clear();
+                pendingOperations.Clear();
+                output.Text = "";
+                output.Refresh();
+            }
+
             Cache(number);
         }
 
@@ -235,6 +303,16 @@ namespace Calculator_GUI
             float number = 5;
 
             //button 5
+
+            if (clrOnNum == true)
+            {
+                inputtedNumber.Clear();
+                savedNumbers.Clear();
+                pendingOperations.Clear();
+                output.Text = "";
+                output.Refresh();
+            }
+
             Cache(number);
         }
 
@@ -242,6 +320,16 @@ namespace Calculator_GUI
         {
             //local vars
             float number = 6;
+
+
+            if (clrOnNum == true)
+            {
+                inputtedNumber.Clear();
+                savedNumbers.Clear();
+                pendingOperations.Clear();
+                output.Text = "";
+                output.Refresh();
+            }
 
             Cache(number);
         }
@@ -251,6 +339,16 @@ namespace Calculator_GUI
             //local vars
             float number = 7;
 
+
+            if (clrOnNum == true)
+            {
+                inputtedNumber.Clear();
+                savedNumbers.Clear();
+                pendingOperations.Clear();
+                output.Text = "";
+                output.Refresh();
+            }
+
             Cache(number);
         }
 
@@ -258,6 +356,16 @@ namespace Calculator_GUI
         {
             //local vars
             float number = 8;
+
+
+            if (clrOnNum == true)
+            {
+                inputtedNumber.Clear();
+                savedNumbers.Clear();
+                pendingOperations.Clear();
+                output.Text = "";
+                output.Refresh();
+            }
 
             Cache(number);
         }
@@ -267,6 +375,16 @@ namespace Calculator_GUI
             //local vars 
             float number = 9;
 
+
+            if (clrOnNum == true)
+            {
+                inputtedNumber.Clear();
+                savedNumbers.Clear();
+                pendingOperations.Clear();
+                output.Text = "";
+                output.Refresh();
+            }
+
             Cache(number);
         }
 
@@ -274,6 +392,16 @@ namespace Calculator_GUI
         {
             //local vars 
             float number = 0;
+
+
+            if (clrOnNum == true)
+            {
+                inputtedNumber.Clear();
+                savedNumbers.Clear();
+                pendingOperations.Clear();
+                output.Text = "";
+                output.Refresh();
+            }
 
             Cache(number);
         }
@@ -340,6 +468,34 @@ namespace Calculator_GUI
         {
             //do nothing on label click, this should only be used for outputting numbers. possibly could be used as a clear function. 
             return;
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            //CLR Button- clears all data in all lists. 
+            inputtedNumber.Clear();
+            pendingOperations.Clear();
+            savedNumbers.Clear();
+            output.Text = "Cleared.";
+            output.Refresh();
+            clrOnNum = true;
+        }
+
+        private void negButton_Click(object sender, EventArgs e)
+        {
+            if (isNumNeg == true)
+            {
+                isNumNeg = false;
+                negButton.BackColor = Color.Transparent;
+                output.Text.TrimStart('-');
+                output.Refresh();
+            } else
+            {
+                isNumNeg = true;
+                negButton.BackColor = Color.LightGray;
+                output.Text = "-" + output.Text;
+                output.Refresh();
+            }
         }
     }
 }
