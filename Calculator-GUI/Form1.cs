@@ -32,6 +32,8 @@
         //TODO add extended math functions. 
 
         //TODO make said identifier toggleable by the user- e.g. allow the user to turn it on, and reset it without having the click CLR. 
+        //TODO: implement try/catch to catch unhandled exceptions, and prompt the user to try inputting their calculation again. 
+        //TODO: look at ways to port the program to other platforms. 
         //POSSIBILTITY: Look at reconfiguring the list to hold tuples, that then hold numbers along with their respective ops. This would increase performance, as it would cut the time looking in the lists. However, no person in their right mind is going to try to shove a billion operations down the program in one go, thus reducing the benefits of cutting the big O notation down. This also would increase reliability, as it would reduce the likelihood that an extra number or op gets put into the list. 
 using System;
 using System.Collections.Generic;
@@ -107,7 +109,7 @@ namespace Calculator_GUI
 
             bool numListCheck = false;
 
-            foreach (var value in inputtedNumber)
+            foreach (var value in inputtedNumber) 
             {
                 concatList += Convert.ToString(value);
 
@@ -180,7 +182,7 @@ namespace Calculator_GUI
             if (oper == '=')
             {
 
-                foreach (var value in pendingOperations)
+                foreach (var value in pendingOperations) /*   O(n)   */
                 {
                     int a = pendingOperations.IndexOf(value); //finds the index of the current operation, to load in the correctly corresponding number value in savedNumbers.
                     int b = a + 1;
