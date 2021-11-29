@@ -10,3 +10,10 @@ So far, the following features have been implemented:
  
  More features to come! 
  
+ 
+ 
+ 
+ 
+ 
+ 
+Also, we don't talk about the tags... I realized the . following v was redundant and fixed it, but I can't figure out how to remove the pushed tags, so it'll have to stay I guess. 
