@@ -30,7 +30,7 @@
         //-----^^ DONE ^^---------- vv TODO vv --------------------------
         
         //TODO add extended math functions. 
-
+        //TODO make a new method to clear the lists. 
         //TODO make said identifier toggleable by the user- e.g. allow the user to turn it on, and reset it without having the click CLR. 
         //POSSIBILTITY: Look at reconfiguring the list to hold tuples, that then hold numbers along with their respective ops. This would increase performance, as it would cut the time looking in the lists. However, no person in their right mind is going to try to shove a billion operations down the program in one go, thus reducing the benefits of cutting the big O notation down. This also would increase reliability, as it would reduce the likelihood that an extra number or op gets put into the list. 
 using System;
@@ -518,29 +518,38 @@ namespace Calculator_GUI
                 output.Text = replacement;
                 output.Refresh();
             } else
-            {  
+            {
                 //time to write some terrible code that may or may not work
-                if (inputtedNumber.Count == 0 && savedNumbers[0] < 0)
+                try
                 {
-                    //this makes a negative number positive. 
-                    savedNumbers[0] *= -1; //this should only activate if an output has been delivered, and the user wants to invert it. 
-                    Console.WriteLine("Inverted!"); //done for debugging, remove later.
-                    isNumNeg = false;
-                    negButton.BackColor = Color.Transparent;
-                    output.Text = Convert.ToString(savedNumbers[0]);
-                    output.Refresh();
-                    return; //do not run below code. 
-                }
-                if (inputtedNumber.Count == 0 && savedNumbers[0] > 0) /*  a continuation of the above shoddy code  */
+                    if (inputtedNumber.Count == 0 && savedNumbers[0] < 0)
+                    {
+                        //this makes a negative number positive. 
+                        savedNumbers[0] *= -1; //this should only activate if an output has been delivered, and the user wants to invert it. 
+                        Console.WriteLine("Inverted!"); //done for debugging, remove later.
+                        isNumNeg = false;
+                        negButton.BackColor = Color.Transparent;
+                        output.Text = Convert.ToString(savedNumbers[0]);
+                        output.Refresh();
+                        return; //do not run below code. 
+                    }
+                    if (inputtedNumber.Count == 0 && savedNumbers[0] > 0) /*  a continuation of the above shoddy code  */
+                    {
+                        //this makes a positive number positive. 
+                        savedNumbers[0] *= -1; //this should only activate if an output has been delivered, and the user wants to invert it.
+                        Console.WriteLine("Inverted!"); //done for debugging, remove later.
+                        isNumNeg = false;   //DO NOT SET THIS TO TRUE! or else it will force the next inputted number to be inverted. 
+                        negButton.BackColor = Color.LightGray; //however, light up the neg button to give the user the illusion they did something. 
+                        output.Text = Convert.ToString(savedNumbers[0]);
+                        output.Refresh();
+                        return; //don't run below code. 
+                    }
+                } catch
                 {
-                    //this makes a positive number positive. 
-                    savedNumbers[0] *= -1; //this should only activate if an output has been delivered, and the user wants to invert it.
-                    Console.WriteLine("Inverted!"); //done for debugging, remove later.
-                    isNumNeg = false;   //DO NOT SET THIS TO TRUE! or else it will force the next inputted number to be inverted. 
-                    negButton.BackColor = Color.LightGray; //however, light up the neg button to give the user the illusion they did something. 
-                    output.Text = Convert.ToString(savedNumbers[0]);
-                    output.Refresh();
-                    return; //don't run below code. 
+                    output.Text = "an error occured.";
+                    inputtedNumber.Clear();
+                    savedNumbers.Clear();
+                    pendingOperations.Clear();
                 }
                 isNumNeg = true;
                 negButton.BackColor = Color.LightGray;
