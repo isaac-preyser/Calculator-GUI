@@ -1,40 +1,48 @@
 ﻿
-        //TODO: **DONE**    Make inputtedNumber use int32, and then output label converts to string. 
-        
-        //TODO: check if List<T>.Insert pushes or overwrites data. Calculate() is messed up.    *Note* it pushes data. I need to delete the entry and then insert in that location. **DONE**
-        
-        //TODO: rewrite case '=' in Calculate(). It's broken. **FIXED**
-        
-        //TODO: make output a rounded float, so then outputs can be decimals. **DONE**
-        
-        //NOTE: Visual Studio 2022's auto code completion is extremely more intuitive than VS2019. I'd highly recommend upgrading to it. 
-        
-        //TODO: add a 'C' button to clear the memory of the calculator. **DONE**
-       
-        //TODO: consider automatically clearing saved number if an op is not inputted after a result. same with clear(), and how it outputs "cleared", and when the user inputs the next info, it concatenates onto "cleared" instead of clearing the message. This could be achieved with a bool that is tripped after completing an op, and checks everytime a number is inputted. e.g. 
-       
-        /*
-         * Complete Op- save output to index 0 of saved nums
-         * set bool clrOnNewNum to true (make this a global var, or the equivalent in c# so it can be checked everywhere)
-         * check on input of new digits if clrOnNewNum is true
-         * if true:
-         *      clear lists
-         *      clear output.label
-         *      carry on w/ normal output
-         *      
-         *      **DONE**
-         */ 
-        
-        //TODO add negative number identifier to allow for the input of negative numbers. **DONE**
+//TODO: **DONE**    Make inputtedNumber use int32, and then output label converts to string. 
 
-        //-----^^ DONE ^^---------- vv TODO vv --------------------------
-        
-        //TODO add extended math functions. 
-        //TODO make a new method to clear the lists. 
-        //TODO make said identifier toggleable by the user- e.g. allow the user to turn it on, and reset it without having the click CLR. 
-        //TODO: implement try/catch to catch unhandled exceptions, and prompt the user to try inputting their calculation again. 
-        //TODO: look at ways to port the program to other platforms. 
-        //POSSIBILTITY: Look at reconfiguring the list to hold tuples, that then hold numbers along with their respective ops. This would increase performance, as it would cut the time looking in the lists. However, no person in their right mind is going to try to shove a billion operations down the program in one go, thus reducing the benefits of cutting the big O notation down. This also would increase reliability, as it would reduce the likelihood that an extra number or op gets put into the list. 
+//TODO: check if List<T>.Insert pushes or overwrites data. Calculate() is messed up.    *Note* it pushes data. I need to delete the entry and then insert in that location. **DONE**
+
+//TODO: rewrite case '=' in Calculate(). It's broken. **FIXED**
+
+//TODO: make output a rounded float, so then outputs can be decimals. **DONE**
+
+//NOTE: Visual Studio 2022's auto code completion is extremely more intuitive than VS2019. I'd highly recommend upgrading to it. 
+
+//TODO: add a 'C' button to clear the memory of the calculator. **DONE**
+
+//TODO: consider automatically clearing saved number if an op is not inputted after a result. same with clear(), and how it outputs "cleared", and when the user inputs the next info, it concatenates onto "cleared" instead of clearing the message. This could be achieved with a bool that is tripped after completing an op, and checks everytime a number is inputted. e.g. 
+
+/*
+ * Complete Op- save output to index 0 of saved nums
+ * set bool clrOnNewNum to true (make this a global var, or the equivalent in c# so it can be checked everywhere)
+ * check on input of new digits if clrOnNewNum is true
+ * if true:
+ *      clear lists
+ *      clear output.label
+ *      carry on w/ normal output
+ *      
+ *      **DONE**
+ */
+
+//TODO add negative number identifier to allow for the input of negative numbers. **DONE**
+
+//TODO make said identifier toggleable by the user- e.g. allow the user to turn it on, and reset it without having the click CLR. **DONE**
+
+//TODO make a new method to clear the lists. this is purely quality of life. **DONE**
+
+//TODO add extended math functions. **DONE**
+//-----^^ DONE ^^---------- vv TODO vv --------------------------
+
+//TODO: add sin, cos, tan
+
+
+//TODO: implement try/catch to catch unhandled exceptions, and prompt the user to try inputting their calculation again. With WinForms, I am hesitant to put in this work, as the math functions seems to hold their own against things like dividing by 0. 
+//TODO: look at ways to port the program to other platforms. 
+//POSSIBILTITY: Look at reconfiguring the list to hold tuples, that then hold numbers along with their respective ops. This would increase performance, as it would cut the time looking in the lists. However, no person in their right mind is going to try to shove a billion operations down the program in one go, thus reducing the benefits of cutting the big O notation down. This also would increase reliability, as it would reduce the likelihood that an extra number or op gets put into the list. 
+//POSSIBILITY: Look at creating  my own data type to bundle together ops and values into one list. 
+
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,7 +60,7 @@ namespace Calculator_GUI
     public partial class CalcWindow : Form
     {
 
-
+        Random rand = new Random();
 
         //lists that save numbers for the calculator. the first one saves the inputted numbers, the second saves the saved numbers after an operation has been selected. 
         List<float> inputtedNumber = new List<float>(); //this list takes the numbers from the numpad that the user inputs and saves them.
@@ -62,6 +70,8 @@ namespace Calculator_GUI
         bool clrOnNum = false;
 
         bool isNumNeg = false; //used to check if the negative number button has been clicked. 
+
+        bool firstRun = true;
 
         //should look like: 
         /*
@@ -80,8 +90,20 @@ namespace Calculator_GUI
          */
 
 
+        private void ClearLists()
+        {
+            savedNumbers.Clear();
+            pendingOperations.Clear();
+            inputtedNumber.Clear();
+        }
+        
+        
+        
         public List<float> Cache(float input)
         {
+
+            firstRun = false; // at this point it is not first run. This check is so the neg-number toggle doesnt break if the user starts the program and clicks negative. 
+            
             clrOnNum = false; //reset clear on num
 
             //create list
@@ -209,6 +231,12 @@ namespace Calculator_GUI
                             savedNumbers.Remove(b);
                             savedNumbers.Insert(b, workingNumber);
                             break;
+                        case '^':
+                            workingNumber = Convert.ToSingle(Math.Pow(Convert.ToDouble(savedNumbers[a]), Convert.ToDouble(savedNumbers[b])));
+                            savedNumbers.Remove(b);
+                            savedNumbers.Insert(b, workingNumber);
+                            break;
+
                         case '=':
                             output.Text = Convert.ToString(workingNumber);
                             savedNumbers.Clear();
@@ -249,9 +277,7 @@ namespace Calculator_GUI
             //clears the lists and resets the output box if user inputs a number instead of an op when the number is saved after the next operation. (so the user can go 3 + 3 = 6, + 4 = 10. however if the user goes 3 + 3 = 6, then inputs 3 + 4, it won't output 67.)
             if(clrOnNum == true)
             {
-                inputtedNumber.Clear();
-                savedNumbers.Clear();
-                pendingOperations.Clear();
+                ClearLists();
                 output.Text = "";
                 output.Refresh();
             }
@@ -274,9 +300,7 @@ namespace Calculator_GUI
 
             if (clrOnNum == true)
             {
-                inputtedNumber.Clear();
-                savedNumbers.Clear();
-                pendingOperations.Clear();
+                ClearLists();
                 output.Text = "";
                 output.Refresh();
             }
@@ -292,9 +316,7 @@ namespace Calculator_GUI
 
             if (clrOnNum == true)
             {
-                inputtedNumber.Clear();
-                savedNumbers.Clear();
-                pendingOperations.Clear();
+                ClearLists();
                 output.Text = "";
                 output.Refresh();
             }
@@ -311,9 +333,7 @@ namespace Calculator_GUI
 
             if (clrOnNum == true)
             {
-                inputtedNumber.Clear();
-                savedNumbers.Clear();
-                pendingOperations.Clear();
+                ClearLists();
                 output.Text = "";
                 output.Refresh();
             }
@@ -330,9 +350,7 @@ namespace Calculator_GUI
 
             if (clrOnNum == true)
             {
-                inputtedNumber.Clear();
-                savedNumbers.Clear();
-                pendingOperations.Clear();
+                ClearLists();
                 output.Text = "";
                 output.Refresh();
             }
@@ -348,9 +366,7 @@ namespace Calculator_GUI
 
             if (clrOnNum == true)
             {
-                inputtedNumber.Clear();
-                savedNumbers.Clear();
-                pendingOperations.Clear();
+                ClearLists();
                 output.Text = "";
                 output.Refresh();
             }
@@ -366,9 +382,7 @@ namespace Calculator_GUI
 
             if (clrOnNum == true)
             {
-                inputtedNumber.Clear();
-                savedNumbers.Clear();
-                pendingOperations.Clear();
+                ClearLists();
                 output.Text = "";
                 output.Refresh();
             }
@@ -384,9 +398,7 @@ namespace Calculator_GUI
 
             if (clrOnNum == true)
             {
-                inputtedNumber.Clear();
-                savedNumbers.Clear();
-                pendingOperations.Clear();
+                ClearLists();
                 output.Text = "";
                 output.Refresh();
             }
@@ -402,9 +414,7 @@ namespace Calculator_GUI
 
             if (clrOnNum == true)
             {
-                inputtedNumber.Clear();
-                savedNumbers.Clear();
-                pendingOperations.Clear();
+                ClearLists();
                 output.Text = "";
                 output.Refresh();
             }
@@ -417,12 +427,10 @@ namespace Calculator_GUI
             //local vars 
             float number = 0;
 
-
+            //some of the DRY-est code i've ever written
             if (clrOnNum == true)
             {
-                inputtedNumber.Clear();
-                savedNumbers.Clear();
-                pendingOperations.Clear();
+                ClearLists();
                 output.Text = "";
                 output.Refresh();
             }
@@ -521,43 +529,132 @@ namespace Calculator_GUI
                 output.Refresh();
             } else
             {
-                //time to write some terrible code that may or may not work
-                try
+                //time to write some terrible code that may or may not work 
+                if (firstRun == false) /* this check prevents an unhandled exception, because if the user clicks neg right after starting the program, it will check the 0 index of saved numbers, which at this point doesn't exist, triggering the exception. */
                 {
-                    if (inputtedNumber.Count == 0 && savedNumbers[0] < 0)
+                    try
                     {
-                        //this makes a negative number positive. 
-                        savedNumbers[0] *= -1; //this should only activate if an output has been delivered, and the user wants to invert it. 
-                        Console.WriteLine("Inverted!"); //done for debugging, remove later.
-                        isNumNeg = false;
-                        negButton.BackColor = Color.Transparent;
-                        output.Text = Convert.ToString(savedNumbers[0]);
-                        output.Refresh();
-                        return; //do not run below code. 
+                        if (inputtedNumber.Count == 0 && savedNumbers[0] < 0)
+                        {
+                            //this makes a negative number positive. 
+                            savedNumbers[0] *= -1; //this should only activate if an output has been delivered, and the user wants to invert it. 
+                            Console.WriteLine("Inverted!"); //done for debugging, remove later.
+                            isNumNeg = false;
+                            negButton.BackColor = Color.Transparent;
+                            output.Text = Convert.ToString(savedNumbers[0]);
+                            output.Refresh();
+                            return; //do not run below code. 
+                        }
+                        if (inputtedNumber.Count == 0 && savedNumbers[0] > 0) /*  a continuation of the above shoddy code  */
+                        {
+                            //this makes a positive number positive. 
+                            savedNumbers[0] *= -1; //this should only activate if an output has been delivered, and the user wants to invert it.
+                            Console.WriteLine("Inverted!"); //done for debugging, remove later.
+                            isNumNeg = false;   //DO NOT SET THIS TO TRUE! or else it will force the next inputted number to be inverted. 
+                            negButton.BackColor = Color.LightGray; //however, light up the neg button to give the user the illusion they did something. 
+                            output.Text = Convert.ToString(savedNumbers[0]);
+                            output.Refresh();
+                            return; //don't run below code. 
+                        }
                     }
-                    if (inputtedNumber.Count == 0 && savedNumbers[0] > 0) /*  a continuation of the above shoddy code  */
+                    catch
                     {
-                        //this makes a positive number positive. 
-                        savedNumbers[0] *= -1; //this should only activate if an output has been delivered, and the user wants to invert it.
-                        Console.WriteLine("Inverted!"); //done for debugging, remove later.
-                        isNumNeg = false;   //DO NOT SET THIS TO TRUE! or else it will force the next inputted number to be inverted. 
-                        negButton.BackColor = Color.LightGray; //however, light up the neg button to give the user the illusion they did something. 
-                        output.Text = Convert.ToString(savedNumbers[0]);
-                        output.Refresh();
-                        return; //don't run below code. 
+                        output.Text = "An error occured while trying to carry out that action, please try again.";
+                        ClearLists();
                     }
-                } catch
-                {
-                    output.Text = "an error occured.";
-                    inputtedNumber.Clear();
-                    savedNumbers.Clear();
-                    pendingOperations.Clear();
-                }
+                }   
                 isNumNeg = true;
                 negButton.BackColor = Color.LightGray;
                 output.Text = "-" + output.Text;
                 output.Refresh();
             }
+        }
+
+        private void sqrtButton_Click(object sender, EventArgs e)
+        {
+            
+            float workingNmbr = Single.Parse(output.Text);
+            double result = Math.Sqrt(workingNmbr);
+
+            //ripped from case '=' in calculate
+
+            output.Text = Convert.ToString(result);
+            savedNumbers.Clear();
+            savedNumbers.Add(Convert.ToSingle(result));    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
+            inputtedNumber.Clear();
+            output.Refresh();
+            clrOnNum = true; //setup for auto-clearing if user begins inputting a new calculation immediately. 
+                             //reset neg number button
+            isNumNeg = false;
+            negButton.BackColor = Color.Transparent;
+        }
+
+        private void buttonSqr_Click(object sender, EventArgs e)
+        {
+            float workingNmbr = Single.Parse(output.Text);
+            double result = Math.Pow(workingNmbr, 2);
+
+            //ripped from case '=' in calculate
+
+            output.Text = Convert.ToString(result);
+            savedNumbers.Clear();
+            savedNumbers.Add(Convert.ToSingle(result));    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
+            inputtedNumber.Clear();
+            output.Refresh();
+            clrOnNum = true; //setup for auto-clearing if user begins inputting a new calculation immediately. 
+                             //reset neg number button
+            isNumNeg = false;
+            negButton.BackColor = Color.Transparent;
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+
+            //^x button
+
+            //local vars
+            char op = '^';
+
+
+            output.Text = $"{op}";
+            output.Refresh();
+            ParseNumber(op);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //RNG button
+            double result = rand.Next(0,2048);
+
+            //ripped from case '=' in calculate
+
+            output.Text = Convert.ToString(result);
+            savedNumbers.Clear();
+            savedNumbers.Add(Convert.ToSingle(result));    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
+            inputtedNumber.Clear();
+            output.Refresh();
+            clrOnNum = true; //setup for auto-clearing if user begins inputting a new calculation immediately. 
+                             //reset neg number button
+            isNumNeg = false;
+            negButton.BackColor = Color.Transparent;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+            double result = Math.PI;
+            
+            //ripped from case '=' in calculate
+
+            output.Text = Convert.ToString(result);
+            savedNumbers.Clear();
+            savedNumbers.Add(Convert.ToSingle(result));    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
+            inputtedNumber.Clear();
+            output.Refresh();
+            clrOnNum = true; //setup for auto-clearing if user begins inputting a new calculation immediately. 
+                             //reset neg number button
+            isNumNeg = false;
+            negButton.BackColor = Color.Transparent;
         }
     }
 }

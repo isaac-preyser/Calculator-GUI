@@ -48,10 +48,16 @@ namespace Calculator_GUI
             this.output = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.negButton = new System.Windows.Forms.Button();
+            this.sqrtButton = new System.Windows.Forms.Button();
+            this.buttonSqr = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // nmbr1
             // 
+            this.nmbr1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nmbr1.Location = new System.Drawing.Point(40, 61);
             this.nmbr1.Name = "nmbr1";
             this.nmbr1.Size = new System.Drawing.Size(43, 41);
@@ -62,6 +68,7 @@ namespace Calculator_GUI
             // 
             // nmbr2
             // 
+            this.nmbr2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nmbr2.Location = new System.Drawing.Point(89, 61);
             this.nmbr2.Name = "nmbr2";
             this.nmbr2.Size = new System.Drawing.Size(43, 41);
@@ -72,6 +79,7 @@ namespace Calculator_GUI
             // 
             // nmbr3
             // 
+            this.nmbr3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nmbr3.Location = new System.Drawing.Point(138, 61);
             this.nmbr3.Name = "nmbr3";
             this.nmbr3.Size = new System.Drawing.Size(43, 41);
@@ -82,6 +90,7 @@ namespace Calculator_GUI
             // 
             // nmbr4
             // 
+            this.nmbr4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nmbr4.Location = new System.Drawing.Point(40, 108);
             this.nmbr4.Name = "nmbr4";
             this.nmbr4.Size = new System.Drawing.Size(43, 41);
@@ -92,6 +101,7 @@ namespace Calculator_GUI
             // 
             // nmbr5
             // 
+            this.nmbr5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nmbr5.Location = new System.Drawing.Point(89, 108);
             this.nmbr5.Name = "nmbr5";
             this.nmbr5.Size = new System.Drawing.Size(43, 41);
@@ -102,6 +112,7 @@ namespace Calculator_GUI
             // 
             // nmbr6
             // 
+            this.nmbr6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nmbr6.Location = new System.Drawing.Point(138, 108);
             this.nmbr6.Name = "nmbr6";
             this.nmbr6.Size = new System.Drawing.Size(43, 41);
@@ -112,6 +123,7 @@ namespace Calculator_GUI
             // 
             // nmbr7
             // 
+            this.nmbr7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nmbr7.Location = new System.Drawing.Point(40, 155);
             this.nmbr7.Name = "nmbr7";
             this.nmbr7.Size = new System.Drawing.Size(43, 41);
@@ -122,6 +134,7 @@ namespace Calculator_GUI
             // 
             // nmbr8
             // 
+            this.nmbr8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nmbr8.Location = new System.Drawing.Point(89, 155);
             this.nmbr8.Name = "nmbr8";
             this.nmbr8.Size = new System.Drawing.Size(43, 41);
@@ -132,6 +145,7 @@ namespace Calculator_GUI
             // 
             // nmbr9
             // 
+            this.nmbr9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nmbr9.Location = new System.Drawing.Point(138, 155);
             this.nmbr9.Name = "nmbr9";
             this.nmbr9.Size = new System.Drawing.Size(43, 41);
@@ -142,6 +156,7 @@ namespace Calculator_GUI
             // 
             // nmbr0
             // 
+            this.nmbr0.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nmbr0.Location = new System.Drawing.Point(40, 202);
             this.nmbr0.Name = "nmbr0";
             this.nmbr0.Size = new System.Drawing.Size(43, 41);
@@ -152,6 +167,7 @@ namespace Calculator_GUI
             // 
             // operEquals
             // 
+            this.operEquals.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.operEquals.Location = new System.Drawing.Point(89, 202);
             this.operEquals.Name = "operEquals";
             this.operEquals.Size = new System.Drawing.Size(92, 41);
@@ -162,6 +178,7 @@ namespace Calculator_GUI
             // 
             // operAdd
             // 
+            this.operAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.operAdd.Location = new System.Drawing.Point(187, 61);
             this.operAdd.Name = "operAdd";
             this.operAdd.Size = new System.Drawing.Size(43, 41);
@@ -172,6 +189,7 @@ namespace Calculator_GUI
             // 
             // operSubtract
             // 
+            this.operSubtract.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.operSubtract.Location = new System.Drawing.Point(187, 108);
             this.operSubtract.Name = "operSubtract";
             this.operSubtract.Size = new System.Drawing.Size(43, 41);
@@ -182,6 +200,7 @@ namespace Calculator_GUI
             // 
             // operMult
             // 
+            this.operMult.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.operMult.Location = new System.Drawing.Point(187, 155);
             this.operMult.Name = "operMult";
             this.operMult.Size = new System.Drawing.Size(43, 41);
@@ -192,6 +211,7 @@ namespace Calculator_GUI
             // 
             // operDiv
             // 
+            this.operDiv.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.operDiv.Location = new System.Drawing.Point(187, 202);
             this.operDiv.Name = "operDiv";
             this.operDiv.Size = new System.Drawing.Size(43, 41);
@@ -215,6 +235,7 @@ namespace Calculator_GUI
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(40, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(43, 41);
@@ -225,6 +246,7 @@ namespace Calculator_GUI
             // 
             // negButton
             // 
+            this.negButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.negButton.Location = new System.Drawing.Point(236, 61);
             this.negButton.Name = "negButton";
             this.negButton.Size = new System.Drawing.Size(43, 41);
@@ -233,11 +255,71 @@ namespace Calculator_GUI
             this.negButton.UseVisualStyleBackColor = true;
             this.negButton.Click += new System.EventHandler(this.negButton_Click);
             // 
+            // sqrtButton
+            // 
+            this.sqrtButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sqrtButton.Location = new System.Drawing.Point(236, 108);
+            this.sqrtButton.Name = "sqrtButton";
+            this.sqrtButton.Size = new System.Drawing.Size(43, 41);
+            this.sqrtButton.TabIndex = 18;
+            this.sqrtButton.Text = "√";
+            this.sqrtButton.UseVisualStyleBackColor = true;
+            this.sqrtButton.Click += new System.EventHandler(this.sqrtButton_Click);
+            // 
+            // buttonSqr
+            // 
+            this.buttonSqr.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSqr.Location = new System.Drawing.Point(236, 155);
+            this.buttonSqr.Name = "buttonSqr";
+            this.buttonSqr.Size = new System.Drawing.Size(43, 41);
+            this.buttonSqr.TabIndex = 19;
+            this.buttonSqr.Text = "x^2";
+            this.buttonSqr.UseVisualStyleBackColor = true;
+            this.buttonSqr.Click += new System.EventHandler(this.buttonSqr_Click);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(236, 201);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(43, 41);
+            this.button2.TabIndex = 20;
+            this.button2.Text = "^x";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(285, 61);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(43, 41);
+            this.button3.TabIndex = 21;
+            this.button3.Text = "RNG";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(285, 108);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(43, 41);
+            this.button4.TabIndex = 22;
+            this.button4.Text = "π";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // CalcWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(325, 280);
+            this.ClientSize = new System.Drawing.Size(576, 285);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonSqr);
+            this.Controls.Add(this.sqrtButton);
             this.Controls.Add(this.negButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.output);
@@ -285,6 +367,11 @@ namespace Calculator_GUI
         private System.Windows.Forms.Label output;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button negButton;
+        private System.Windows.Forms.Button sqrtButton;
+        private System.Windows.Forms.Button buttonSqr;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }
 
