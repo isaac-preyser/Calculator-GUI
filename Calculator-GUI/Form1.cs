@@ -53,6 +53,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Net.Http.Headers;
+using System.Net.Http;
 
 
 namespace Calculator_GUI
@@ -655,6 +657,13 @@ namespace Calculator_GUI
                              //reset neg number button
             isNumNeg = false;
             negButton.BackColor = Color.Transparent;
+        }
+
+        private void openCurrencyConv_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            CurrencyConv form = new CurrencyConv();
+            form.ShowDialog();
         }
     }
 }
