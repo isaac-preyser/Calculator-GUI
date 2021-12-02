@@ -11,40 +11,61 @@ using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Deserializers;
 using Newtonsoft.Json;
+using Json.Net;
+using System.Reflection;
 
 namespace Calculator_GUI
 { 
     public partial class CurrencyConv : Form
     {
 
+        CurrRoot currValues = new CurrRoot();
 
         public CurrencyConv()
         {
             InitializeComponent();
+            
+
         }
 
+        
+        
         public void Form2_Load(object sender, EventArgs e)
         {
-        
-
+           
         }
 
         private void label1_Click_1(object sender, EventArgs e)
         {
-            //on load, get ready to use api. 
-            //this is my first time attempting to use an API, please don't rip me a new one. 
+                //on load, get ready to use api. 
+                //this is my first time attempting to use an API, please don't rip me a new one. 
 
-            string[] currency = { "USD", }; //do later- should parse through inital ping to the API, and parse for every currency code, and add it to this array.
-            int selectedCurrency = 0;
-            string apiKey = "e8ed1000-52ec-11ec-89ee-d986dfcfbb87";
-            var client = new RestClient("https://freecurrencyapi.net");
-            var request = new RestRequest($"/api/v2/latest?apikey=" + apiKey + "&base_currency=" + currency[selectedCurrency] + "&fields=data", DataFormat.Json);
-            var response = client.Get(request);
+                string[] currency = { "USD", }; //do later- should parse through inital ping to the API, and parse for every currency code, and add it to this array.
+                int selectedCurrency = 0;
+                string apiKey = "e8ed1000-52ec-11ec-89ee-d986dfcfbb87";
+                var client = new RestClient("https://freecurrencyapi.net");
+                var request = new RestRequest($"/api/v2/latest?apikey=" + apiKey + "&base_currency=" + currency[selectedCurrency] + "&fields=data", DataFormat.Json);
+                var response = client.Get(request);
 
-            RestSharp.Serialization.Json.JsonDeserializer deserial = new RestSharp.Serialization.Json.JsonDeserializer();
+                RestSharp.Serialization.Json.JsonDeserializer deserial = new RestSharp.Serialization.Json.JsonDeserializer();
 
 
-            var deserialized = JsonConvert.DeserializeObject<CurrRoot>(response.Content);
+                currValues = JsonConvert.DeserializeObject<CurrRoot>(response.Content);
+
+            Type test = currValues.data.GetType();
+
+            PropertyInfo[] props = test.GetProperties();
+
+            
+
+            foreach (PropertyInfo prop in props)
+            {
+                comboBox1.Items.Add(Convert.ToString(prop).TrimStart('D', 'o', 'u', 'b', 'l', 'e', ' '));
+            }
+                
+                
+             
+            
         }
 
         private void openCalc_Click(object sender, EventArgs e)
@@ -56,7 +77,21 @@ namespace Calculator_GUI
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboBox1.Items.Add
+           
+        }
+
+        private void convertButton_Click(object sender, EventArgs e)
+        {
+            Type t = currValues.data.GetType();
+            PropertyInfo[] props = t.GetProperties();
+            foreach (PropertyInfo p in props)
+            {
+                if (Convert.ToString(p).TrimStart('D', 'o', 'u', 'b', 'l', 'e', ' ') == Convert.ToString(comboBox1.SelectedItem))
+                {
+                    toLabel.Text = Convert.ToString(comboBox1.SelectedItem);
+                    break;
+                }
+            }
         }
     }
     public class CurrQuery

@@ -29,20 +29,22 @@ namespace Calculator_GUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.toLabel = new System.Windows.Forms.Label();
             this.openCalc = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.convertButton = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // label1
+            // toLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
+            this.toLabel.AutoSize = true;
+            this.toLabel.Location = new System.Drawing.Point(161, 80);
+            this.toLabel.Name = "toLabel";
+            this.toLabel.Size = new System.Drawing.Size(16, 13);
+            this.toLabel.TabIndex = 0;
+            this.toLabel.Text = "to";
+            this.toLabel.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // openCalc
             // 
@@ -58,18 +60,39 @@ namespace Calculator_GUI
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(92, 65);
+            this.comboBox1.Location = new System.Drawing.Point(111, 53);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 25;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // convertButton
+            // 
+            this.convertButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.convertButton.Location = new System.Drawing.Point(238, 53);
+            this.convertButton.Name = "convertButton";
+            this.convertButton.Size = new System.Drawing.Size(103, 65);
+            this.convertButton.TabIndex = 26;
+            this.convertButton.Text = "Convert";
+            this.convertButton.UseVisualStyleBackColor = true;
+            this.convertButton.Click += new System.EventHandler(this.convertButton_Click);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(111, 97);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 27;
+            // 
             // CurrencyConv
             // 
             this.ClientSize = new System.Drawing.Size(767, 278);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.convertButton);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.openCalc);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.toLabel);
             this.Name = "CurrencyConv";
             this.Text = "CurrencyConv";
             this.ResumeLayout(false);
@@ -79,8 +102,10 @@ namespace Calculator_GUI
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label toLabel;
         private System.Windows.Forms.Button openCalc;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button convertButton;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }
