@@ -31,6 +31,7 @@ namespace Calculator_GUI
         {
             this.label1 = new System.Windows.Forms.Label();
             this.openCalc = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -54,9 +55,19 @@ namespace Calculator_GUI
             this.openCalc.UseVisualStyleBackColor = true;
             this.openCalc.Click += new System.EventHandler(this.openCalc_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(92, 65);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 25;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // CurrencyConv
             // 
             this.ClientSize = new System.Drawing.Size(767, 278);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.openCalc);
             this.Controls.Add(this.label1);
             this.Name = "CurrencyConv";
@@ -70,5 +81,6 @@ namespace Calculator_GUI
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button openCalc;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
