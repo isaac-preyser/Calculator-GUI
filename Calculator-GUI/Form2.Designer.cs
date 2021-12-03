@@ -34,6 +34,7 @@ namespace Calculator_GUI
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.convertButton = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.testOutput = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // toLabel
@@ -85,9 +86,19 @@ namespace Calculator_GUI
             this.comboBox2.Size = new System.Drawing.Size(121, 21);
             this.comboBox2.TabIndex = 27;
             // 
+            // testOutput
+            // 
+            this.testOutput.AutoSize = true;
+            this.testOutput.Location = new System.Drawing.Point(488, 80);
+            this.testOutput.Name = "testOutput";
+            this.testOutput.Size = new System.Drawing.Size(56, 13);
+            this.testOutput.TabIndex = 28;
+            this.testOutput.Text = "testOutput";
+            // 
             // CurrencyConv
             // 
             this.ClientSize = new System.Drawing.Size(767, 278);
+            this.Controls.Add(this.testOutput);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.convertButton);
             this.Controls.Add(this.comboBox1);
@@ -107,5 +118,6 @@ namespace Calculator_GUI
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button convertButton;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label testOutput;
     }
 }

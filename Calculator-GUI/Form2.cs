@@ -24,44 +24,50 @@ namespace Calculator_GUI
         public CurrencyConv()
         {
             InitializeComponent();
+            PingApi("USD");
+
+        }
+
+
+        private void PingApi(string currCode)
+        {
             
+            string apiKey = "e8ed1000-52ec-11ec-89ee-d986dfcfbb87";
+            var client = new RestClient("https://freecurrencyapi.net");
+            var request = new RestRequest($"/api/v2/latest?apikey=" + apiKey + "&base_currency=" + currCode +  "&fields=data", DataFormat.Json);
+            var response = client.Get(request);
 
-        }
-
-        
-        
-        public void Form2_Load(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-                //on load, get ready to use api. 
-                //this is my first time attempting to use an API, please don't rip me a new one. 
-
-                string[] currency = { "USD", }; //do later- should parse through inital ping to the API, and parse for every currency code, and add it to this array.
-                int selectedCurrency = 0;
-                string apiKey = "e8ed1000-52ec-11ec-89ee-d986dfcfbb87";
-                var client = new RestClient("https://freecurrencyapi.net");
-                var request = new RestRequest($"/api/v2/latest?apikey=" + apiKey + "&base_currency=" + currency[selectedCurrency] + "&fields=data", DataFormat.Json);
-                var response = client.Get(request);
-
-                RestSharp.Serialization.Json.JsonDeserializer deserial = new RestSharp.Serialization.Json.JsonDeserializer();
-
-
-                currValues = JsonConvert.DeserializeObject<CurrRoot>(response.Content);
+            currValues = JsonConvert.DeserializeObject<CurrRoot>(response.Content);
 
             Type test = currValues.data.GetType();
 
             PropertyInfo[] props = test.GetProperties();
 
-            
 
+            List<string> currency = new List<string>(); //do later- should parse through inital ping to the API, and parse for every currency code, and add it to this array.
+            
             foreach (PropertyInfo prop in props)
             {
-                comboBox1.Items.Add(Convert.ToString(prop).TrimStart('D', 'o', 'u', 'b', 'l', 'e', ' '));
+                currency.Add(Convert.ToString(prop).TrimStart('D', 'o', 'u', 'b', 'l', 'e', ' '));
+              
             }
+
+            comboBox1.Items.AddRange(currency.ToArray());
+            comboBox2.Items.AddRange(currency.ToArray());
+
+        }
+        
+        
+        public void Form2_Load(object sender, EventArgs e)
+        {
+            //on load, get ready to use api. 
+            //this is my first time attempting to use an API, please don't rip me a new one. 
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+               
                 
                 
              
@@ -82,16 +88,49 @@ namespace Calculator_GUI
 
         private void convertButton_Click(object sender, EventArgs e)
         {
+            //locals
             Type t = currValues.data.GetType();
             PropertyInfo[] props = t.GetProperties();
+            bool oneTrue = false;
+            bool twoTrue = false;
+            PropertyInfo selectedProp1 = props[0];
+            PropertyInfo selectedProp2 = props[0];
+
+            //code
             foreach (PropertyInfo p in props)
             {
                 if (Convert.ToString(p).TrimStart('D', 'o', 'u', 'b', 'l', 'e', ' ') == Convert.ToString(comboBox1.SelectedItem))
                 {
                     toLabel.Text = Convert.ToString(comboBox1.SelectedItem);
-                    break;
+                    selectedProp1 = p;
+                    oneTrue = true;
+                    if (twoTrue == true && oneTrue == true)
+                    {
+                        break;
+                    }
+                    
+                }
+                if (Convert.ToString(p).TrimStart('D', 'o', 'u', 'b', 'l', 'e', ' ') == Convert.ToString(comboBox2.SelectedItem))
+                {
+                    selectedProp2 = p;
+                    twoTrue = true;
+                    if (twoTrue == true && oneTrue == true)
+                    {
+                        break;
+                    }
                 }
             }
+
+            PingApi(Convert.ToString(selectedProp1.Name.TrimStart('D', 'o', 'u', 'b', 'l', 'e', ' ')));
+            switch(selectedProp2.Name.TrimStart('D', 'o', 'u', 'b', 'l', 'e', ' '))
+            {
+                case "CAD":
+                    testOutput.Text = Convert.ToString(currValues.data.CAD); //it is time to use grep to skip writing all this code. this is a terrible way of doing this
+                    break;
+                
+            }
+            
+            
         }
     }
     public class CurrQuery
@@ -103,6 +142,7 @@ namespace Calculator_GUI
 
     public class CurrData
     {
+        public double USD { get; set; }
         public double JPY { get; set; }
         public double CNY { get; set; } //consider rewriting this monstrosity to parse individual datapoints (maybe seek help understanding how to do this..)
         public double CHF { get; set; }//should basically parse the string and int out to grab the right data, and loop through for each pair of things. 
