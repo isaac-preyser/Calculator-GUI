@@ -78,6 +78,7 @@ namespace Calculator_GUI
         {
             CalcWindow form = new CalcWindow();
             this.Hide();
+            this.Close();
             form.ShowDialog(); //this doesn't end the process, so if a user spammed the button they could end up running out of memory. 
         }
 

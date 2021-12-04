@@ -664,6 +664,7 @@ namespace Calculator_GUI
             this.Hide();
             CurrencyConv form = new CurrencyConv();
             form.ShowDialog();
+            this.Close();
         }
     }
 }
