@@ -42,7 +42,7 @@ namespace Calculator_GUI
             // toLabel
             // 
             this.toLabel.AutoSize = true;
-            this.toLabel.Location = new System.Drawing.Point(199, 107);
+            this.toLabel.Location = new System.Drawing.Point(145, 68);
             this.toLabel.Name = "toLabel";
             this.toLabel.Size = new System.Drawing.Size(16, 13);
             this.toLabel.TabIndex = 0;
@@ -52,7 +52,7 @@ namespace Calculator_GUI
             // openCalc
             // 
             this.openCalc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCalc.Location = new System.Drawing.Point(467, 232);
+            this.openCalc.Location = new System.Drawing.Point(374, 99);
             this.openCalc.Name = "openCalc";
             this.openCalc.Size = new System.Drawing.Size(97, 41);
             this.openCalc.TabIndex = 24;
@@ -63,18 +63,18 @@ namespace Calculator_GUI
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(149, 80);
+            this.comboBox1.Location = new System.Drawing.Point(94, 44);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.Size = new System.Drawing.Size(113, 21);
             this.comboBox1.TabIndex = 25;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // convertButton
             // 
             this.convertButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.convertButton.Location = new System.Drawing.Point(276, 80);
+            this.convertButton.Location = new System.Drawing.Point(221, 40);
             this.convertButton.Name = "convertButton";
-            this.convertButton.Size = new System.Drawing.Size(103, 65);
+            this.convertButton.Size = new System.Drawing.Size(95, 63);
             this.convertButton.TabIndex = 26;
             this.convertButton.Text = "Convert";
             this.convertButton.UseVisualStyleBackColor = true;
@@ -83,9 +83,9 @@ namespace Calculator_GUI
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(149, 124);
+            this.comboBox2.Location = new System.Drawing.Point(94, 84);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.Size = new System.Drawing.Size(113, 21);
             this.comboBox2.TabIndex = 27;
             // 
             // testOutput
@@ -94,29 +94,29 @@ namespace Calculator_GUI
             this.testOutput.BackColor = System.Drawing.SystemColors.Control;
             this.testOutput.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.testOutput.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.testOutput.Location = new System.Drawing.Point(385, 103);
+            this.testOutput.Location = new System.Drawing.Point(322, 63);
             this.testOutput.Name = "testOutput";
-            this.testOutput.Size = new System.Drawing.Size(102, 17);
+            this.testOutput.Size = new System.Drawing.Size(149, 17);
             this.testOutput.TabIndex = 29;
-            this.testOutput.Text = "placeholder text";
+            this.testOutput.Text = "Enter a value to convert.";
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(75, 80);
+            this.numericUpDown1.Location = new System.Drawing.Point(20, 45);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             2048,
             0,
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(68, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(60, 20);
             this.numericUpDown1.TabIndex = 30;
             this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // CurrencyConv
             // 
-            this.ClientSize = new System.Drawing.Size(576, 285);
+            this.ClientSize = new System.Drawing.Size(485, 152);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.testOutput);
             this.Controls.Add(this.comboBox2);

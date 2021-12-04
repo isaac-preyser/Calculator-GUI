@@ -35,7 +35,7 @@
 //-----^^ DONE ^^---------- vv TODO vv --------------------------
 
 //TODO: add sin, cos, tan
-
+//TODO: add a decimal input button. 
 
 //TODO: implement try/catch to catch unhandled exceptions, and prompt the user to try inputting their calculation again. With WinForms, I am hesitant to put in this work, as the math functions seems to hold their own against things like dividing by 0. 
 //TODO: look at ways to port the program to other platforms. 

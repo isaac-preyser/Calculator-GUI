@@ -8,10 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RestSharp;
-using RestSharp.Authenticators;
-using RestSharp.Deserializers;
 using Newtonsoft.Json;
-using Json.Net;
 using System.Reflection;
 
 namespace Calculator_GUI
@@ -126,430 +123,150 @@ namespace Calculator_GUI
             PingApi(Convert.ToString(selectedProp1.Name.TrimStart('D', 'o', 'u', 'b', 'l', 'e', ' ')));
             switch(selectedProp2.Name.TrimStart('D', 'o', 'u', 'b', 'l', 'e', ' '))
             {
-                case "CAD":
-                    testOutput.Text = Convert.ToString(currValues.data.CAD); //it is time to use grep to skip writing all this code. this is a terrible way of doing this
-                    break;
-               case "USD":
-                    testOutput.Text = Convert.ToString(currValues.data.USD); //I LOVE MULTI-CARETED EDITNG ty v much microsoft
-                    break;                                                 
-               case "JPY":                                                  
-                    testOutput.Text = Convert.ToString(currValues.data.JPY);
-                    break;
-               case "CNY": 
-                    testOutput.Text = Convert.ToString(currValues.data.CNY);
-                    break;
-               case "CHF": 
-                    testOutput.Text = Convert.ToString(currValues.data.CHF);
-                    break;
-               case "MXN": 
-                    testOutput.Text = Convert.ToString(currValues.data.MXN);
-                    break;
-               case "INR": 
-                    testOutput.Text = Convert.ToString(currValues.data.INR);
-                    break;
-               case "BRL": 
-                    testOutput.Text = Convert.ToString(currValues.data.BRL);
-                    break;
-               case "RUB": 
-                    testOutput.Text = Convert.ToString(currValues.data.RUB);
-                    break;
-               case "KRW": 
-                    testOutput.Text = Convert.ToString(currValues.data.KRW);
-                    break;
-               case "IDR": 
-                    testOutput.Text = Convert.ToString(currValues.data.IDR);
-                    break;
-               case "TRY": 
-                    testOutput.Text = Convert.ToString(currValues.data.TRY);
-                    break;
-               case "SAR": 
-                    testOutput.Text = Convert.ToString(currValues.data.SAR);
-                    break;
-               case "SEK": 
-                    testOutput.Text = Convert.ToString(currValues.data.SEK);
-                    break;
-               case "NGN": 
-                    testOutput.Text = Convert.ToString(currValues.data.NGN);
-                    break;
-               case "PLN": 
-                    testOutput.Text = Convert.ToString(currValues.data.PLN);
-                    break;
-               case "ARS": 
-                    testOutput.Text = Convert.ToString(currValues.data.ARS);
-                    break;
-               case "NOK": 
-                    testOutput.Text = Convert.ToString(currValues.data.NOK);
-                    break;
-               case "TWD": 
-                    testOutput.Text = Convert.ToString(currValues.data.TWD);
-                    break;
-               case "IRR": 
-                    testOutput.Text = Convert.ToString(currValues.data.IRR);
-                    break;
-               case "AED": 
-                    testOutput.Text = Convert.ToString(currValues.data.AED);
-                    break;
-               case "COP": 
-                    testOutput.Text = Convert.ToString(currValues.data.COP);
-                    break;
-               case "THB": 
-                    testOutput.Text = Convert.ToString(currValues.data.THB);
-                    break;
-               case "ZAR": 
-                    testOutput.Text = Convert.ToString(currValues.data.ZAR);
-                    break;
-               case "DKK": 
-                    testOutput.Text = Convert.ToString(currValues.data.DKK);
-                    break;
-               case "MYR": 
-                    testOutput.Text = Convert.ToString(currValues.data.MYR);
-                    break;
-               case "SGD": 
-                    testOutput.Text = Convert.ToString(currValues.data.SGD);
-                    break;
-               case "ILS": 
-                    testOutput.Text = Convert.ToString(currValues.data.ILS);
-                    break;
-               case "HKD": 
-                    testOutput.Text = Convert.ToString(currValues.data.HKD);
-                    break;
-               case "EGP": 
-                    testOutput.Text = Convert.ToString(currValues.data.EGP);
-                    break;
-               case "PHP": 
-                    testOutput.Text = Convert.ToString(currValues.data.PHP);
-                    break;
-               case "CLP": 
-                    testOutput.Text = Convert.ToString(currValues.data.CLP);
-                    break;
-               case "PKR": 
-                    testOutput.Text = Convert.ToString(currValues.data.PKR);
-                    break;
-               case "IQD": 
-                    testOutput.Text = Convert.ToString(currValues.data.IQD);
-                    break;
-               case "DZD": 
-                    testOutput.Text = Convert.ToString(currValues.data.DZD);
-                    break;
-               case "KZT": 
-                    testOutput.Text = Convert.ToString(currValues.data.KZT);
-                    break;
-               case "QAR": 
-                    testOutput.Text = Convert.ToString(currValues.data.QAR);
-                    break;
-               case "CZK": 
-                    testOutput.Text = Convert.ToString(currValues.data.CZK);
-                    break;
-               case "PEN": 
-                    testOutput.Text = Convert.ToString(currValues.data.PEN);
-                    break;
-               case "RON": 
-                    testOutput.Text = Convert.ToString(currValues.data.RON);
-                    break;
-               case "VND": 
-                    testOutput.Text = Convert.ToString(currValues.data.VND);
-                    break;
-               case "BDT": 
-                    testOutput.Text = Convert.ToString(currValues.data.BDT);
-                    break;
-               case "HUF": 
-                    testOutput.Text = Convert.ToString(currValues.data.HUF);
-                    break;
-               case "UAH": 
-                    testOutput.Text = Convert.ToString(currValues.data.UAH);
-                    break;
-               case "AOA": 
-                    testOutput.Text = Convert.ToString(currValues.data.AOA);
-                    break;
-               case "MAD": 
-                    testOutput.Text = Convert.ToString(currValues.data.MAD);
-                    break;
-               case "OMR": 
-                    testOutput.Text = Convert.ToString(currValues.data.OMR);
-                    break;
-               case "CUC": 
-                    testOutput.Text = Convert.ToString(currValues.data.CUC);
-                    break;
-               case "BYR": 
-                    testOutput.Text = Convert.ToString(currValues.data.BYR);
-                    break;
-               case "AZN": 
-                    testOutput.Text = Convert.ToString(currValues.data.AZN);
-                    break;
-               case "LKR": 
-                    testOutput.Text = Convert.ToString(currValues.data.LKR);
-                    break;
-               case "SDG": 
-                    testOutput.Text = Convert.ToString(currValues.data.SDG);
-                    break;
-               case "SYP": 
-                    testOutput.Text = Convert.ToString(currValues.data.SYP);
-                    break;
-               case "MMK": 
-                    testOutput.Text = Convert.ToString(currValues.data.MMK);
-                    break;
-               case "DOP": 
-                    testOutput.Text = Convert.ToString(currValues.data.DOP);
-                    break;
-               case "UZS": 
-                    testOutput.Text = Convert.ToString(currValues.data.UZS);
-                    break;
-               case "KES": 
-                    testOutput.Text = Convert.ToString(currValues.data.KES);
-                    break;
-               case "GTQ": 
-                    testOutput.Text = Convert.ToString(currValues.data.GTQ);
-                    break;
-               case "URY": 
-                    testOutput.Text = Convert.ToString(currValues.data.URY);
-                    break;
-               case "HRV": 
-                    testOutput.Text = Convert.ToString(currValues.data.HRV);
-                    break;
-               case "MOP": 
-                    testOutput.Text = Convert.ToString(currValues.data.MOP);
-                    break;
-               case "ETB": 
-                    testOutput.Text = Convert.ToString(currValues.data.ETB);
-                    break;
-               case "CRC": 
-                    testOutput.Text = Convert.ToString(currValues.data.CRC);
-                    break;
-               case "TZS": 
-                    testOutput.Text = Convert.ToString(currValues.data.TZS);
-                    break;
-               case "TMT": 
-                    testOutput.Text = Convert.ToString(currValues.data.TMT);
-                    break;
-               case "TND": 
-                    testOutput.Text = Convert.ToString(currValues.data.TND);
-                    break;
-               case "PAB": 
-                    testOutput.Text = Convert.ToString(currValues.data.PAB);
-                    break;
-               case "LBP": 
-                    testOutput.Text = Convert.ToString(currValues.data.LBP);
-                    break;
-               case "RSD": 
-                    testOutput.Text = Convert.ToString(currValues.data.RSD);
-                    break;
-               case "LYD": 
-                    testOutput.Text = Convert.ToString(currValues.data.LYD);
-                    break;
-               case "GHS": 
-                    testOutput.Text = Convert.ToString(currValues.data.GHS);
-                    break;
-               case "YER": 
-                    testOutput.Text = Convert.ToString(currValues.data.YER);
-                    break;
-               case "BOB": 
-                    testOutput.Text = Convert.ToString(currValues.data.BOB);
-                    break;
-               case "BHD": 
-                    testOutput.Text = Convert.ToString(currValues.data.BHD);
-                    break;
-               case "CDF": 
-                    testOutput.Text = Convert.ToString(currValues.data.CDF);
-                    break;
-               case "PYG": 
-                    testOutput.Text = Convert.ToString(currValues.data.PYG);
-                    break;
-               case "UGX": 
-                    testOutput.Text = Convert.ToString(currValues.data.UGX);
-                    break;
-               case "SVC": 
-                    testOutput.Text = Convert.ToString(currValues.data.SVC);
-                    break;
-               case "TTD": 
-                    testOutput.Text = Convert.ToString(currValues.data.TTD);
-                    break;
-               case "AFN": 
-                    testOutput.Text = Convert.ToString(currValues.data.AFN);
-                    break;
-               case "NPR": 
-                    testOutput.Text = Convert.ToString(currValues.data.NPR);
-                    break;
-               case "HNL": 
-                    testOutput.Text = Convert.ToString(currValues.data.HNL);
-                    break;
-               case "BIH": 
-                    testOutput.Text = Convert.ToString(currValues.data.BIH);
-                    break;
-               case "BND": 
-                    testOutput.Text = Convert.ToString(currValues.data.BND);
-                    break;
-               case "ISK": 
-                    testOutput.Text = Convert.ToString(currValues.data.ISK);
-                    break;
-               case "KHR": 
-                    testOutput.Text = Convert.ToString(currValues.data.KHR);
-                    break;
-               case "GEL": 
-                    testOutput.Text = Convert.ToString(currValues.data.GEL);
-                    break;
-               case "MZN": 
-                    testOutput.Text = Convert.ToString(currValues.data.MZN);
-                    break;
-               case "BWP": 
-                    testOutput.Text = Convert.ToString(currValues.data.BWP);
-                    break;
-               case "PGK": 
-                    testOutput.Text = Convert.ToString(currValues.data.PGK);
-                    break;
-               case "JMD": 
-                    testOutput.Text = Convert.ToString(currValues.data.JMD);
-                    break;
-               case "XAF": 
-                    testOutput.Text = Convert.ToString(currValues.data.XAF);
-                    break;
-               case "NAD": 
-                    testOutput.Text = Convert.ToString(currValues.data.NAD);
-                    break;
-               case "ALL": 
-                    testOutput.Text = Convert.ToString(currValues.data.ALL);
-                    break;
-               case "SSP": 
-                    testOutput.Text = Convert.ToString(currValues.data.SSP);
-                    break;
-               case "MUR": 
-                    testOutput.Text = Convert.ToString(currValues.data.MUR);
-                    break;
-               case "MNT": 
-                    testOutput.Text = Convert.ToString(currValues.data.MNT);
-                    break;
-               case "NIO": 
-                    testOutput.Text = Convert.ToString(currValues.data.NIO);
-                    break;
-               case "LAK": 
-                    testOutput.Text = Convert.ToString(currValues.data.LAK);
-                    break;
-               case "MKD": 
-                    testOutput.Text = Convert.ToString(currValues.data.MKD);
-                    break;
-               case "AMD": 
-                    testOutput.Text = Convert.ToString(currValues.data.AMD);
-                    break;
-               case "MGA": 
-                    testOutput.Text = Convert.ToString(currValues.data.MGA);
-                    break;
-               case "XPF": 
-                    testOutput.Text = Convert.ToString(currValues.data.XPF);
-                    break;
-               case "TJS": 
-                    testOutput.Text = Convert.ToString(currValues.data.TJS);
-                    break;
-               case "HTG": 
-                    testOutput.Text = Convert.ToString(currValues.data.HTG);
-                    break;
-               case "BSD": 
-                    testOutput.Text = Convert.ToString(currValues.data.BSD);
-                    break;
-               case "MDL": 
-                    testOutput.Text = Convert.ToString(currValues.data.MDL);
-                    break;
-               case "RWF": 
-                    testOutput.Text = Convert.ToString(currValues.data.RWF);
-                    break;
-               case "KGS": 
-                    testOutput.Text = Convert.ToString(currValues.data.KGS);
-                    break;
-               case "GNF": 
-                    testOutput.Text = Convert.ToString(currValues.data.GNF);
-                    break;
-               case "SRD": 
-                    testOutput.Text = Convert.ToString(currValues.data.SRD);
-                    break;
-               case "SLL": 
-                    testOutput.Text = Convert.ToString(currValues.data.SLL);
-                    break;
-               case "XOF": 
-                    testOutput.Text = Convert.ToString(currValues.data.XOF);
-                    break;
-               case "MWK": 
-                    testOutput.Text = Convert.ToString(currValues.data.MWK);
-                    break;
-               case "FJD": 
-                    testOutput.Text = Convert.ToString(currValues.data.FJD);
-                    break;
-               case "ERN": 
-                    testOutput.Text = Convert.ToString(currValues.data.ERN);
-                    break;
-               case "SZL": 
-                    testOutput.Text = Convert.ToString(currValues.data.SZL);
-                    break;
-               case "GYD": 
-                    testOutput.Text = Convert.ToString(currValues.data.GYD);
-                    break;
-               case "BIF": 
-                    testOutput.Text = Convert.ToString(currValues.data.BIF);
-                    break;
-               case "KYD": 
-                    testOutput.Text = Convert.ToString(currValues.data.KYD);
-                    break;
-               case "MVR": 
-                    testOutput.Text = Convert.ToString(currValues.data.MVR);
-                    break;
-               case "LSL": 
-                    testOutput.Text = Convert.ToString(currValues.data.LSL);
-                    break;
-               case "LRD": 
-                    testOutput.Text = Convert.ToString(currValues.data.LRD);
-                    break;
-               case "CVE": 
-                    testOutput.Text = Convert.ToString(currValues.data.CVE);
-                    break;
-               case "DJF": 
-                    testOutput.Text = Convert.ToString(currValues.data.DJF);
-                    break;
-               case "SCR": 
-                    testOutput.Text = Convert.ToString(currValues.data.SCR);
-                    break;
-               case "SOS": 
-                    testOutput.Text = Convert.ToString(currValues.data.SOS);
-                    break;
-               case "GMD": 
-                    testOutput.Text = Convert.ToString(currValues.data.GMD);
-                    break;
-               case "KMF": 
-                    testOutput.Text = Convert.ToString(currValues.data.KMF);
-                    break;
-               case "STD": 
-                    testOutput.Text = Convert.ToString(currValues.data.STD);
-                    break;
-               case "XRP": 
-                    testOutput.Text = Convert.ToString(currValues.data.XRP);
-                    break;
-               case "AUD": 
-                    testOutput.Text = Convert.ToString(currValues.data.AUD);
-                    break;
-               case "BGN": 
-                    testOutput.Text = Convert.ToString(currValues.data.BGN);
-                    break;
-               case "BTC": 
-                    testOutput.Text = Convert.ToString(currValues.data.BTC);
-                    break;
-               case "JOD": 
-                    testOutput.Text = Convert.ToString(currValues.data.JOD);
-                    break;
-               case "GBP": 
-                    testOutput.Text = Convert.ToString(currValues.data.GBP);
-                    break;
-               case "ETH": 
-                    testOutput.Text = Convert.ToString(currValues.data.ETH);
-                    break;
-               case "EUR": 
-                    testOutput.Text = Convert.ToString(currValues.data.EUR);
-                    break;
-               case "LTC": 
-                    testOutput.Text = Convert.ToString(currValues.data.LTC);
-                    break;
-               case "NZD": 
-                    testOutput.Text = Convert.ToString(currValues.data.NZD);
-                    break;
+                case "USD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.USD * Convert.ToDouble(currAmt), 2)); break;
+                case "JPY":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.JPY * Convert.ToDouble(currAmt), 2)); break;
+                case "CNY":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.CNY * Convert.ToDouble(currAmt), 2)); break;
+                case "CHF":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.CHF * Convert.ToDouble(currAmt), 2)); break;
+                case "CAD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.CAD * Convert.ToDouble(currAmt), 2)); break;
+                case "MXN":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.MXN * Convert.ToDouble(currAmt), 2)); break;
+                case "INR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.INR * Convert.ToDouble(currAmt), 2)); break;
+                case "BRL":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.BRL * Convert.ToDouble(currAmt), 2)); break;
+                case "RUB":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.RUB * Convert.ToDouble(currAmt), 2)); break;
+                case "KRW":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.KRW * Convert.ToDouble(currAmt), 2)); break;
+                case "IDR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.IDR * Convert.ToDouble(currAmt), 2)); break;
+                case "TRY":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.TRY * Convert.ToDouble(currAmt), 2)); break;
+                case "SAR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.SAR * Convert.ToDouble(currAmt), 2)); break;
+                case "SEK":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.SEK * Convert.ToDouble(currAmt), 2)); break;
+                case "NGN":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.NGN * Convert.ToDouble(currAmt), 2)); break;
+                case "PLN":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.PLN * Convert.ToDouble(currAmt), 2)); break;
+                case "ARS":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.ARS * Convert.ToDouble(currAmt), 2)); break;
+                case "NOK":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.NOK * Convert.ToDouble(currAmt), 2)); break;
+                case "TWD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.TWD * Convert.ToDouble(currAmt), 2)); break;
+                case "IRR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.IRR * Convert.ToDouble(currAmt), 2)); break;
+                case "AED":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.AED * Convert.ToDouble(currAmt), 2)); break;
+                case "COP":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.COP * Convert.ToDouble(currAmt), 2)); break;
+                case "THB":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.THB * Convert.ToDouble(currAmt), 2)); break;
+                case "ZAR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.ZAR * Convert.ToDouble(currAmt), 2)); break;
+                case "DKK":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.DKK * Convert.ToDouble(currAmt), 2)); break;
+                case "MYR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.MYR * Convert.ToDouble(currAmt), 2)); break;
+                case "SGD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.SGD * Convert.ToDouble(currAmt), 2)); break;
+                case "ILS":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.ILS * Convert.ToDouble(currAmt), 2)); break;
+                case "HKD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.HKD * Convert.ToDouble(currAmt), 2)); break;
+                case "EGP":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.EGP * Convert.ToDouble(currAmt), 2)); break;
+                case "PHP":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.PHP * Convert.ToDouble(currAmt), 2)); break;
+                case "CLP":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.CLP * Convert.ToDouble(currAmt), 2)); break;
+                case "PKR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.PKR * Convert.ToDouble(currAmt), 2)); break;
+                case "IQD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.IQD * Convert.ToDouble(currAmt), 2)); break;
+                case "DZD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.DZD * Convert.ToDouble(currAmt), 2)); break;
+                case "KZT":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.KZT * Convert.ToDouble(currAmt), 2)); break;
+                case "QAR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.QAR * Convert.ToDouble(currAmt), 2)); break;
+                case "CZK":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.CZK * Convert.ToDouble(currAmt), 2)); break;
+                case "PEN":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.PEN * Convert.ToDouble(currAmt), 2)); break;
+                case "RON":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.RON * Convert.ToDouble(currAmt), 2)); break;
+                case "VND":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.VND * Convert.ToDouble(currAmt), 2)); break;
+                case "BDT":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.BDT * Convert.ToDouble(currAmt), 2)); break;
+                case "HUF":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.HUF * Convert.ToDouble(currAmt), 2)); break;
+                case "UAH":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.UAH * Convert.ToDouble(currAmt), 2)); break;
+                case "AOA":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.AOA * Convert.ToDouble(currAmt), 2)); break;
+                case "MAD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.MAD * Convert.ToDouble(currAmt), 2)); break;
+                case "OMR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.OMR * Convert.ToDouble(currAmt), 2)); break;
+                case "CUC":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.CUC * Convert.ToDouble(currAmt), 2)); break;
+                case "BYR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.BYR * Convert.ToDouble(currAmt), 2)); break;
+                case "AZN":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.AZN * Convert.ToDouble(currAmt), 2)); break;
+                case "LKR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.LKR * Convert.ToDouble(currAmt), 2)); break;
+                case "SDG":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.SDG * Convert.ToDouble(currAmt), 2)); break;
+                case "SYP":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.SYP * Convert.ToDouble(currAmt), 2)); break;
+                case "MMK":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.MMK * Convert.ToDouble(currAmt), 2)); break;
+                case "DOP":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.DOP * Convert.ToDouble(currAmt), 2)); break;
+                case "UZS":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.UZS * Convert.ToDouble(currAmt), 2)); break;
+                case "KES":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.KES * Convert.ToDouble(currAmt), 2)); break;
+                case "GTQ":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.GTQ * Convert.ToDouble(currAmt), 2)); break;
+                case "URY":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.URY * Convert.ToDouble(currAmt), 2)); break;
+                case "HRV":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.HRV * Convert.ToDouble(currAmt), 2)); break;
+                case "MOP":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.MOP * Convert.ToDouble(currAmt), 2)); break;
+                case "ETB":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.ETB * Convert.ToDouble(currAmt), 2)); break;
+                case "CRC":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.CRC * Convert.ToDouble(currAmt), 2)); break;
+                case "TZS":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.TZS * Convert.ToDouble(currAmt), 2)); break;
+                case "TMT":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.TMT * Convert.ToDouble(currAmt), 2)); break;
+                case "TND":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.TND * Convert.ToDouble(currAmt), 2)); break;
+                case "PAB":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.PAB * Convert.ToDouble(currAmt), 2)); break;
+                case "LBP":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.LBP * Convert.ToDouble(currAmt), 2)); break;
+                case "RSD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.RSD * Convert.ToDouble(currAmt), 2)); break;
+                case "LYD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.LYD * Convert.ToDouble(currAmt), 2)); break;
+                case "GHS":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.GHS * Convert.ToDouble(currAmt), 2)); break;
+                case "YER":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.YER * Convert.ToDouble(currAmt), 2)); break;
+                case "BOB":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.BOB * Convert.ToDouble(currAmt), 2)); break;
+                case "BHD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.BHD * Convert.ToDouble(currAmt), 2)); break;
+                case "CDF":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.CDF * Convert.ToDouble(currAmt), 2)); break;
+                case "PYG":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.PYG * Convert.ToDouble(currAmt), 2)); break;
+                case "UGX":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.UGX * Convert.ToDouble(currAmt), 2)); break;
+                case "SVC":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.SVC * Convert.ToDouble(currAmt), 2)); break;
+                case "TTD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.TTD * Convert.ToDouble(currAmt), 2)); break;
+                case "AFN":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.AFN * Convert.ToDouble(currAmt), 2)); break;
+                case "NPR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.NPR * Convert.ToDouble(currAmt), 2)); break;
+                case "HNL":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.HNL * Convert.ToDouble(currAmt), 2)); break;
+                case "BIH":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.BIH * Convert.ToDouble(currAmt), 2)); break;
+                case "BND":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.BND * Convert.ToDouble(currAmt), 2)); break;
+                case "ISK":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.ISK * Convert.ToDouble(currAmt), 2)); break;
+                case "KHR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.KHR * Convert.ToDouble(currAmt), 2)); break;
+                case "GEL":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.GEL * Convert.ToDouble(currAmt), 2)); break;
+                case "MZN":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.MZN * Convert.ToDouble(currAmt), 2)); break;
+                case "BWP":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.BWP * Convert.ToDouble(currAmt), 2)); break;
+                case "PGK":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.PGK * Convert.ToDouble(currAmt), 2)); break;
+                case "JMD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.JMD * Convert.ToDouble(currAmt), 2)); break;
+                case "XAF":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.XAF * Convert.ToDouble(currAmt), 2)); break;
+                case "NAD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.NAD * Convert.ToDouble(currAmt), 2)); break;
+                case "ALL":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.ALL * Convert.ToDouble(currAmt), 2)); break;
+                case "SSP":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.SSP * Convert.ToDouble(currAmt), 2)); break;
+                case "MUR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.MUR * Convert.ToDouble(currAmt), 2)); break;
+                case "MNT":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.MNT * Convert.ToDouble(currAmt), 2)); break;
+                case "NIO":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.NIO * Convert.ToDouble(currAmt), 2)); break;
+                case "LAK":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.LAK * Convert.ToDouble(currAmt), 2)); break;
+                case "MKD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.MKD * Convert.ToDouble(currAmt), 2)); break;
+                case "AMD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.AMD * Convert.ToDouble(currAmt), 2)); break;
+                case "MGA":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.MGA * Convert.ToDouble(currAmt), 2)); break;
+                case "XPF":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.XPF * Convert.ToDouble(currAmt), 2)); break;
+                case "TJS":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.TJS * Convert.ToDouble(currAmt), 2)); break;
+                case "HTG":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.HTG * Convert.ToDouble(currAmt), 2)); break;
+                case "BSD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.BSD * Convert.ToDouble(currAmt), 2)); break;
+                case "MDL":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.MDL * Convert.ToDouble(currAmt), 2)); break;
+                case "RWF":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.RWF * Convert.ToDouble(currAmt), 2)); break;
+                case "KGS":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.KGS * Convert.ToDouble(currAmt), 2)); break;
+                case "GNF":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.GNF * Convert.ToDouble(currAmt), 2)); break;
+                case "SRD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.SRD * Convert.ToDouble(currAmt), 2)); break;
+                case "SLL":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.SLL * Convert.ToDouble(currAmt), 2)); break;
+                case "XOF":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.XOF * Convert.ToDouble(currAmt), 2)); break;
+                case "MWK":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.MWK * Convert.ToDouble(currAmt), 2)); break;
+                case "FJD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.FJD * Convert.ToDouble(currAmt), 2)); break;
+                case "ERN":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.ERN * Convert.ToDouble(currAmt), 2)); break;
+                case "SZL":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.SZL * Convert.ToDouble(currAmt), 2)); break;
+                case "GYD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.GYD * Convert.ToDouble(currAmt), 2)); break;
+                case "BIF":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.BIF * Convert.ToDouble(currAmt), 2)); break;
+                case "KYD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.KYD * Convert.ToDouble(currAmt), 2)); break;
+                case "MVR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.MVR * Convert.ToDouble(currAmt), 2)); break;
+                case "LSL":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.LSL * Convert.ToDouble(currAmt), 2)); break;
+                case "LRD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.LRD * Convert.ToDouble(currAmt), 2)); break;
+                case "CVE":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.CVE * Convert.ToDouble(currAmt), 2)); break;
+                case "DJF":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.DJF * Convert.ToDouble(currAmt), 2)); break;
+                case "SCR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.SCR * Convert.ToDouble(currAmt), 2)); break;
+                case "SOS":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.SOS * Convert.ToDouble(currAmt), 2)); break;
+                case "GMD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.GMD * Convert.ToDouble(currAmt), 2)); break;
+                case "KMF":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.KMF * Convert.ToDouble(currAmt), 2)); break;
+                case "STD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.STD * Convert.ToDouble(currAmt), 2)); break;
+                case "XRP":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.XRP * Convert.ToDouble(currAmt), 2)); break;
+                case "AUD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.AUD * Convert.ToDouble(currAmt), 2)); break;
+                case "BGN":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.BGN * Convert.ToDouble(currAmt), 2)); break;
+                case "BTC":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.BTC * Convert.ToDouble(currAmt), 2)); break;
+                case "JOD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.JOD * Convert.ToDouble(currAmt), 2)); break;
+                case "GBP":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.GBP * Convert.ToDouble(currAmt), 2)); break;
+                case "ETH":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.ETH * Convert.ToDouble(currAmt), 2)); break;
+                case "EUR":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.EUR * Convert.ToDouble(currAmt), 2)); break;
+                case "LTC":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.LTC * Convert.ToDouble(currAmt), 2)); break;
+                case "NZD":	testOutput.Text = Convert.ToString(Math.Round(currValues.data.NZD * Convert.ToDouble(currAmt), 2)); break;
 
-    }
-            
-            
+            }
+
+
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
