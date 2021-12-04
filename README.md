@@ -1,6 +1,8 @@
 ## Welcome to Calculator-GUI!
 This is simply a basic calculator that runs on Windows platforms. 
 
+>Please note that this is not meant to be amazing yet, it's my first app.
+
 So far, the following features have been implemented: 
 
  - Basic Calculations 
