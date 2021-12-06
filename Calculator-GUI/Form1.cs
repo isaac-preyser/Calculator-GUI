@@ -75,6 +75,7 @@ namespace Calculator_GUI
 
         bool firstRun = true;
 
+        string outString = ""; //used for history outputs  
         //should look like: 
         /*
          * Read: pendingOps[i] .... == '+'
@@ -191,6 +192,7 @@ namespace Calculator_GUI
             //as of right now, this method is broken.
 
             float workingNumber = 0;
+            
 
             if (pendingOperations.Count > savedNumbers.Count)
             {
@@ -201,7 +203,7 @@ namespace Calculator_GUI
                 }
             }
 
-
+            outString += Convert.ToString(savedNumbers[0]); //always add the first input to the output string. 
 
             if (oper == '=')
             {
@@ -215,56 +217,48 @@ namespace Calculator_GUI
                     {
                         case '+':
                             workingNumber = savedNumbers[a] + savedNumbers[b];
+                            outString += $" + " + savedNumbers[b];
                             savedNumbers.Remove(b);
                             savedNumbers.Insert(b, workingNumber); //insert now worked on number in the location of b, which will be a on the next time through. This allows for operations such as 4 + 5 + 6, by going 4 + 5 = 9, and then 9 + 6 = 15.
                             break;
                         case '-':
                             workingNumber = savedNumbers[a] - savedNumbers[b];
+                            outString += $" - " + savedNumbers[b]; 
                             savedNumbers.Remove(b);
                             savedNumbers.Insert(b, workingNumber);
                             break;
                         case 'x':
                             workingNumber = savedNumbers[a] * savedNumbers[b];
+                            outString += $" x " + savedNumbers[b];
                             savedNumbers.Remove(b);
                             savedNumbers.Insert(b, workingNumber);
                             break;
                         case '/':
                             workingNumber = savedNumbers[a] / savedNumbers[b];
+                            outString += $" / " + savedNumbers[b];
                             savedNumbers.Remove(b);
                             savedNumbers.Insert(b, workingNumber);
                             break;
                         case '^':
                             workingNumber = Convert.ToSingle(Math.Pow(Convert.ToDouble(savedNumbers[a]), Convert.ToDouble(savedNumbers[b])));
+                            outString += $" ^ " + savedNumbers[b];
                             savedNumbers.Remove(b);
                             savedNumbers.Insert(b, workingNumber);
                             break;
-                        case '!':
-                            float num = 0;
-                            num = workingNumber;
-                            while (num > 0)
-                            {
-                                int n = Convert.ToInt32(num);
-                                for (int i = n - 1; i > 0; i--)
-                                {
-                                    n *= i;
-                                }
-                                Console.WriteLine(Convert.ToString(n));
-                                num--;
-                            }
-
-
-                            break;
-
                         case '=':
                             output.Text = Convert.ToString(workingNumber);
                             savedNumbers.Clear();
                             savedNumbers.Add(workingNumber);    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
+                            outString += $" = " + workingNumber;
                             inputtedNumber.Clear();
                             output.Refresh();
                             clrOnNum = true; //setup for auto-clearing if user begins inputting a new calculation immediately. 
                             //reset neg number button
                             isNumNeg = false;
                             negButton.BackColor = Color.Transparent;
+                            outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
+                            outHistory.ExpandAll();
+                            outString = "";
                             break;
 
                     }
@@ -282,6 +276,10 @@ namespace Calculator_GUI
         {
             InitializeComponent();
             output.Text = "";
+            ToolTip historyWarn = new ToolTip();
+            historyWarn.SetToolTip(outHistory, "You must press \"CLR\" in order to start a new calculation with a history item. ");
+            historyWarn.AutomaticDelay = 500;
+            historyWarn.ReshowDelay = 1000;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -594,10 +592,12 @@ namespace Calculator_GUI
             float workingNmbr = 0;
             if (output.Text.Length > 0)
             {
-                Single.Parse(output.Text);
+               workingNmbr = Single.Parse(output.Text);
             }
             double result = Math.Sqrt(workingNmbr);
-
+            outString = $"sqrt(" + workingNmbr + ")=" + result;
+            outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
+            outHistory.ExpandAll();
             //ripped from case '=' in calculate
 
             output.Text = Convert.ToString(result);
@@ -616,11 +616,13 @@ namespace Calculator_GUI
             float workingNmbr = 0;
             if (output.Text.Length > 0)
             {
-                Single.Parse(output.Text);
+                workingNmbr = Single.Parse(output.Text);
             }
 
             double result = Math.Pow(workingNmbr, 2);
-
+            outString = $"sqr(" + workingNmbr + ")=" + result;
+            outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
+            outHistory.ExpandAll();
             //ripped from case '=' in calculate
 
             output.Text = Convert.ToString(result);
@@ -654,7 +656,9 @@ namespace Calculator_GUI
             double result = rand.Next(0,2048);
 
             //ripped from case '=' in calculate
-
+            outString = $"RNG = " + result;
+            outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
+            outHistory.ExpandAll();
             output.Text = Convert.ToString(result);
             savedNumbers.Clear();
             savedNumbers.Add(Convert.ToSingle(result));    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
@@ -670,8 +674,11 @@ namespace Calculator_GUI
         {
 
             double result = Math.PI;
-            
+
             //ripped from case '=' in calculate
+            outString = $"Pi = " + result;
+            outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
+            outHistory.ExpandAll();
 
             output.Text = Convert.ToString(result);
             savedNumbers.Clear();
@@ -716,7 +723,9 @@ namespace Calculator_GUI
 
             //using a decimal as a means to store larger numbers (96-bit decimal comapared to 64-bit long)
             decimal result = n; //this easily leads to integer overflows, could implement system.numerics datatype BigInt to have theoreticaly infinite room, at the cost of more memory usage.   
-
+            outString = $""+workingNmbr+"! = " + result;
+            outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
+            outHistory.ExpandAll();
             //ripped from case '=' in calculate
 
             output.Text = Convert.ToString(result);
@@ -729,5 +738,20 @@ namespace Calculator_GUI
             isNumNeg = false;
             negButton.BackColor = Color.Transparent;
         }
+
+        private void outHistory_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            string selectedHistory = Convert.ToString(e.Node.Text).Trim('{', '}');
+            string[] trimmed = selectedHistory.Split(' ');
+            float selected = Single.Parse(trimmed.Last());
+            inputtedNumber.Clear();
+            output.Text = trimmed.Last(); //note if you want to begin a new calculation using a saved number, YOU MUST PRESS CLEAR.
+            savedNumbers.Add(selected);
+
+
+
+        }
+
+  
     }
 }

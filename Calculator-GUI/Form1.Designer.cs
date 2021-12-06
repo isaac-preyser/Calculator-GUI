@@ -29,6 +29,7 @@ namespace Calculator_GUI
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Output History:");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalcWindow));
             this.nmbr1 = new System.Windows.Forms.Button();
             this.nmbr2 = new System.Windows.Forms.Button();
@@ -55,6 +56,7 @@ namespace Calculator_GUI
             this.button4 = new System.Windows.Forms.Button();
             this.openCurrencyConv = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.outHistory = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
             // nmbr1
@@ -316,7 +318,7 @@ namespace Calculator_GUI
             // 
             this.openCurrencyConv.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.openCurrencyConv.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCurrencyConv.Location = new System.Drawing.Point(467, 232);
+            this.openCurrencyConv.Location = new System.Drawing.Point(285, 201);
             this.openCurrencyConv.Name = "openCurrencyConv";
             this.openCurrencyConv.Size = new System.Drawing.Size(97, 41);
             this.openCurrencyConv.TabIndex = 23;
@@ -335,11 +337,32 @@ namespace Calculator_GUI
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // outHistory
+            // 
+            this.outHistory.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.outHistory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.outHistory.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.outHistory.ForeColor = System.Drawing.SystemColors.Window;
+            this.outHistory.Location = new System.Drawing.Point(388, 23);
+            this.outHistory.Name = "outHistory";
+            treeNode1.Checked = true;
+            treeNode1.Name = "prevOutputs";
+            treeNode1.NodeFont = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            treeNode1.Text = "Output History:";
+            this.outHistory.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            this.outHistory.ShowPlusMinus = false;
+            this.outHistory.ShowRootLines = false;
+            this.outHistory.Size = new System.Drawing.Size(176, 220);
+            this.outHistory.TabIndex = 25;
+            this.outHistory.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.outHistory_AfterSelect);
+            // 
             // CalcWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 285);
+            this.Controls.Add(this.outHistory);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.openCurrencyConv);
             this.Controls.Add(this.button4);
@@ -401,6 +424,7 @@ namespace Calculator_GUI
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button openCurrencyConv;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TreeView outHistory;
     }
 }
 
