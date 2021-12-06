@@ -14,6 +14,7 @@ So far, the following features have been implemented:
  - Pi button
  - Factorial button
  - Currency converter
+ - Output History
  
  More features to come! 
  
