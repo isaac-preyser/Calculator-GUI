@@ -12,6 +12,7 @@ So far, the following features have been implemented:
  - Random number generation 
  - Square root and exponent functions
  - Pi button
+ - Factorial button
  - Currency converter
  
  More features to come! 
