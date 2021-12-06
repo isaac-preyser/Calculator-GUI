@@ -34,11 +34,11 @@
 //TODO add extended math functions. **DONE**
 //-----^^ DONE ^^---------- vv TODO vv --------------------------
 
-//TODO: add sin, cos, tan
-//TODO: add a decimal input button. 
+//TODO: add sin, cos, tan **this would be worthless without a decimal button** 
+//TODO: add a decimal input button. **note this would be a headache to implement because I would have to parse out the decimal point, figure out where it is, and figure out a way to place in the point in the float at the right spot. Maybe I could try multiplying by base 10 values eg 1, .1, .01, .001 etc**
 
 //TODO: implement try/catch to catch unhandled exceptions, and prompt the user to try inputting their calculation again. With WinForms, I am hesitant to put in this work, as the math functions seems to hold their own against things like dividing by 0. 
-//TODO: look at ways to port the program to other platforms. 
+//TODO: look at ways to port the program to other platforms. **note mono c# transpiler is wildly outdated and does not support many of the newish features I use in this calculator)**
 //POSSIBILTITY: Look at reconfiguring the list to hold tuples, that then hold numbers along with their respective ops. This would increase performance, as it would cut the time looking in the lists. However, no person in their right mind is going to try to shove a billion operations down the program in one go, thus reducing the benefits of cutting the big O notation down. This also would increase reliability, as it would reduce the likelihood that an extra number or op gets put into the list. 
 //POSSIBILITY: Look at creating  my own data type to bundle together ops and values into one list. 
 
@@ -237,6 +237,22 @@ namespace Calculator_GUI
                             workingNumber = Convert.ToSingle(Math.Pow(Convert.ToDouble(savedNumbers[a]), Convert.ToDouble(savedNumbers[b])));
                             savedNumbers.Remove(b);
                             savedNumbers.Insert(b, workingNumber);
+                            break;
+                        case '!':
+                            float num = 0;
+                            num = workingNumber;
+                            while (num > 0)
+                            {
+                                int n = Convert.ToInt32(num);
+                                for (int i = n - 1; i > 0; i--)
+                                {
+                                    n *= i;
+                                }
+                                Console.WriteLine(Convert.ToString(n));
+                                num--;
+                            }
+
+
                             break;
 
                         case '=':
@@ -574,8 +590,12 @@ namespace Calculator_GUI
 
         private void sqrtButton_Click(object sender, EventArgs e)
         {
-            
-            float workingNmbr = Single.Parse(output.Text);
+
+            float workingNmbr = 0;
+            if (output.Text.Length > 0)
+            {
+                Single.Parse(output.Text);
+            }
             double result = Math.Sqrt(workingNmbr);
 
             //ripped from case '=' in calculate
@@ -593,7 +613,12 @@ namespace Calculator_GUI
 
         private void buttonSqr_Click(object sender, EventArgs e)
         {
-            float workingNmbr = Single.Parse(output.Text);
+            float workingNmbr = 0;
+            if (output.Text.Length > 0)
+            {
+                Single.Parse(output.Text);
+            }
+
             double result = Math.Pow(workingNmbr, 2);
 
             //ripped from case '=' in calculate
@@ -665,6 +690,44 @@ namespace Calculator_GUI
             CurrencyConv form = new CurrencyConv();
             form.ShowDialog();
             this.Close();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //factorial button 
+            float workingNmbr = 0;
+            if (output.Text.Length > 0)
+            {
+                workingNmbr = Single.Parse(output.Text);
+            }
+            decimal num = Convert.ToDecimal(workingNmbr); 
+            decimal n = num;
+            try
+            {
+                for (decimal i = n - 1; i > 0; i--)
+                {
+                    n *= i;
+                }
+            } catch
+            {
+                output.Text = "The inputted number was too large to calculate.";
+            }
+            
+
+            //using a decimal as a means to store larger numbers (96-bit decimal comapared to 64-bit long)
+            decimal result = n; //this easily leads to integer overflows, could implement system.numerics datatype BigInt to have theoreticaly infinite room, at the cost of more memory usage.   
+
+            //ripped from case '=' in calculate
+
+            output.Text = Convert.ToString(result);
+            savedNumbers.Clear();
+            savedNumbers.Add(Convert.ToSingle(result));    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
+            inputtedNumber.Clear();
+            output.Refresh();
+            clrOnNum = true; //setup for auto-clearing if user begins inputting a new calculation immediately. 
+                             //reset neg number button
+            isNumNeg = false;
+            negButton.BackColor = Color.Transparent;
         }
     }
 }

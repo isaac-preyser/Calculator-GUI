@@ -54,6 +54,7 @@ namespace Calculator_GUI
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.openCurrencyConv = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // nmbr1
@@ -323,11 +324,23 @@ namespace Calculator_GUI
             this.openCurrencyConv.UseVisualStyleBackColor = true;
             this.openCurrencyConv.Click += new System.EventHandler(this.openCurrencyConv_Click);
             // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Location = new System.Drawing.Point(285, 155);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(43, 41);
+            this.button5.TabIndex = 24;
+            this.button5.Text = "x!";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // CalcWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 285);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.openCurrencyConv);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -387,6 +400,7 @@ namespace Calculator_GUI
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button openCurrencyConv;
+        private System.Windows.Forms.Button button5;
     }
 }
 

@@ -104,7 +104,7 @@ namespace Calculator_GUI
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(20, 45);
             this.numericUpDown1.Maximum = new decimal(new int[] {
-            2048,
+            2147483647,
             0,
             0,
             0});
