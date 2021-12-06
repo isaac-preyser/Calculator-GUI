@@ -313,6 +313,7 @@ namespace Calculator_GUI
             // 
             // openCurrencyConv
             // 
+            this.openCurrencyConv.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.openCurrencyConv.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openCurrencyConv.Location = new System.Drawing.Point(467, 232);
             this.openCurrencyConv.Name = "openCurrencyConv";

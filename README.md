@@ -9,6 +9,10 @@ So far, the following features have been implemented:
  - Negative Numbers can be entered via toggle
  - Outputs of previous calculations are stored for easier calculations
  - Memory can be cleared via CLR button
+ - Random number generation 
+ - Square root and exponent functions
+ - Pi button
+ - Currency converter
  
  More features to come! 
  
