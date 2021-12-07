@@ -57,12 +57,14 @@ namespace Calculator_GUI
             this.openCurrencyConv = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.outHistory = new System.Windows.Forms.TreeView();
+            this.historyClear = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // nmbr1
             // 
             this.nmbr1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nmbr1.Location = new System.Drawing.Point(40, 61);
+            this.nmbr1.Location = new System.Drawing.Point(14, 63);
             this.nmbr1.Name = "nmbr1";
             this.nmbr1.Size = new System.Drawing.Size(43, 41);
             this.nmbr1.TabIndex = 0;
@@ -73,7 +75,7 @@ namespace Calculator_GUI
             // nmbr2
             // 
             this.nmbr2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nmbr2.Location = new System.Drawing.Point(89, 61);
+            this.nmbr2.Location = new System.Drawing.Point(63, 63);
             this.nmbr2.Name = "nmbr2";
             this.nmbr2.Size = new System.Drawing.Size(43, 41);
             this.nmbr2.TabIndex = 1;
@@ -84,7 +86,7 @@ namespace Calculator_GUI
             // nmbr3
             // 
             this.nmbr3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nmbr3.Location = new System.Drawing.Point(138, 61);
+            this.nmbr3.Location = new System.Drawing.Point(112, 63);
             this.nmbr3.Name = "nmbr3";
             this.nmbr3.Size = new System.Drawing.Size(43, 41);
             this.nmbr3.TabIndex = 2;
@@ -95,7 +97,7 @@ namespace Calculator_GUI
             // nmbr4
             // 
             this.nmbr4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nmbr4.Location = new System.Drawing.Point(40, 108);
+            this.nmbr4.Location = new System.Drawing.Point(14, 110);
             this.nmbr4.Name = "nmbr4";
             this.nmbr4.Size = new System.Drawing.Size(43, 41);
             this.nmbr4.TabIndex = 3;
@@ -106,7 +108,7 @@ namespace Calculator_GUI
             // nmbr5
             // 
             this.nmbr5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nmbr5.Location = new System.Drawing.Point(89, 108);
+            this.nmbr5.Location = new System.Drawing.Point(63, 110);
             this.nmbr5.Name = "nmbr5";
             this.nmbr5.Size = new System.Drawing.Size(43, 41);
             this.nmbr5.TabIndex = 4;
@@ -117,7 +119,7 @@ namespace Calculator_GUI
             // nmbr6
             // 
             this.nmbr6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nmbr6.Location = new System.Drawing.Point(138, 108);
+            this.nmbr6.Location = new System.Drawing.Point(112, 110);
             this.nmbr6.Name = "nmbr6";
             this.nmbr6.Size = new System.Drawing.Size(43, 41);
             this.nmbr6.TabIndex = 5;
@@ -128,7 +130,7 @@ namespace Calculator_GUI
             // nmbr7
             // 
             this.nmbr7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nmbr7.Location = new System.Drawing.Point(40, 155);
+            this.nmbr7.Location = new System.Drawing.Point(14, 157);
             this.nmbr7.Name = "nmbr7";
             this.nmbr7.Size = new System.Drawing.Size(43, 41);
             this.nmbr7.TabIndex = 6;
@@ -139,7 +141,7 @@ namespace Calculator_GUI
             // nmbr8
             // 
             this.nmbr8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nmbr8.Location = new System.Drawing.Point(89, 155);
+            this.nmbr8.Location = new System.Drawing.Point(63, 157);
             this.nmbr8.Name = "nmbr8";
             this.nmbr8.Size = new System.Drawing.Size(43, 41);
             this.nmbr8.TabIndex = 7;
@@ -150,7 +152,7 @@ namespace Calculator_GUI
             // nmbr9
             // 
             this.nmbr9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nmbr9.Location = new System.Drawing.Point(138, 155);
+            this.nmbr9.Location = new System.Drawing.Point(112, 157);
             this.nmbr9.Name = "nmbr9";
             this.nmbr9.Size = new System.Drawing.Size(43, 41);
             this.nmbr9.TabIndex = 8;
@@ -161,7 +163,7 @@ namespace Calculator_GUI
             // nmbr0
             // 
             this.nmbr0.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nmbr0.Location = new System.Drawing.Point(40, 202);
+            this.nmbr0.Location = new System.Drawing.Point(14, 204);
             this.nmbr0.Name = "nmbr0";
             this.nmbr0.Size = new System.Drawing.Size(43, 41);
             this.nmbr0.TabIndex = 9;
@@ -172,7 +174,7 @@ namespace Calculator_GUI
             // operEquals
             // 
             this.operEquals.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.operEquals.Location = new System.Drawing.Point(89, 202);
+            this.operEquals.Location = new System.Drawing.Point(63, 204);
             this.operEquals.Name = "operEquals";
             this.operEquals.Size = new System.Drawing.Size(92, 41);
             this.operEquals.TabIndex = 10;
@@ -183,7 +185,7 @@ namespace Calculator_GUI
             // operAdd
             // 
             this.operAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.operAdd.Location = new System.Drawing.Point(187, 61);
+            this.operAdd.Location = new System.Drawing.Point(161, 63);
             this.operAdd.Name = "operAdd";
             this.operAdd.Size = new System.Drawing.Size(43, 41);
             this.operAdd.TabIndex = 11;
@@ -194,7 +196,7 @@ namespace Calculator_GUI
             // operSubtract
             // 
             this.operSubtract.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.operSubtract.Location = new System.Drawing.Point(187, 108);
+            this.operSubtract.Location = new System.Drawing.Point(161, 110);
             this.operSubtract.Name = "operSubtract";
             this.operSubtract.Size = new System.Drawing.Size(43, 41);
             this.operSubtract.TabIndex = 12;
@@ -205,7 +207,7 @@ namespace Calculator_GUI
             // operMult
             // 
             this.operMult.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.operMult.Location = new System.Drawing.Point(187, 155);
+            this.operMult.Location = new System.Drawing.Point(161, 157);
             this.operMult.Name = "operMult";
             this.operMult.Size = new System.Drawing.Size(43, 41);
             this.operMult.TabIndex = 13;
@@ -216,7 +218,7 @@ namespace Calculator_GUI
             // operDiv
             // 
             this.operDiv.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.operDiv.Location = new System.Drawing.Point(187, 202);
+            this.operDiv.Location = new System.Drawing.Point(161, 204);
             this.operDiv.Name = "operDiv";
             this.operDiv.Size = new System.Drawing.Size(43, 41);
             this.operDiv.TabIndex = 14;
@@ -230,7 +232,7 @@ namespace Calculator_GUI
             this.output.BackColor = System.Drawing.SystemColors.Control;
             this.output.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.output.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.output.Location = new System.Drawing.Point(89, 23);
+            this.output.Location = new System.Drawing.Point(63, 25);
             this.output.Name = "output";
             this.output.Size = new System.Drawing.Size(102, 17);
             this.output.TabIndex = 15;
@@ -240,7 +242,7 @@ namespace Calculator_GUI
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(40, 12);
+            this.button1.Location = new System.Drawing.Point(14, 14);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(43, 41);
             this.button1.TabIndex = 16;
@@ -251,7 +253,7 @@ namespace Calculator_GUI
             // negButton
             // 
             this.negButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.negButton.Location = new System.Drawing.Point(236, 61);
+            this.negButton.Location = new System.Drawing.Point(210, 63);
             this.negButton.Name = "negButton";
             this.negButton.Size = new System.Drawing.Size(43, 41);
             this.negButton.TabIndex = 17;
@@ -262,7 +264,7 @@ namespace Calculator_GUI
             // sqrtButton
             // 
             this.sqrtButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sqrtButton.Location = new System.Drawing.Point(236, 108);
+            this.sqrtButton.Location = new System.Drawing.Point(210, 110);
             this.sqrtButton.Name = "sqrtButton";
             this.sqrtButton.Size = new System.Drawing.Size(43, 41);
             this.sqrtButton.TabIndex = 18;
@@ -273,7 +275,7 @@ namespace Calculator_GUI
             // buttonSqr
             // 
             this.buttonSqr.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSqr.Location = new System.Drawing.Point(236, 155);
+            this.buttonSqr.Location = new System.Drawing.Point(210, 157);
             this.buttonSqr.Name = "buttonSqr";
             this.buttonSqr.Size = new System.Drawing.Size(43, 41);
             this.buttonSqr.TabIndex = 19;
@@ -284,7 +286,7 @@ namespace Calculator_GUI
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(236, 201);
+            this.button2.Location = new System.Drawing.Point(210, 203);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(43, 41);
             this.button2.TabIndex = 20;
@@ -295,7 +297,7 @@ namespace Calculator_GUI
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(285, 61);
+            this.button3.Location = new System.Drawing.Point(259, 63);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(43, 41);
             this.button3.TabIndex = 21;
@@ -306,7 +308,7 @@ namespace Calculator_GUI
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(285, 108);
+            this.button4.Location = new System.Drawing.Point(259, 110);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(43, 41);
             this.button4.TabIndex = 22;
@@ -318,7 +320,7 @@ namespace Calculator_GUI
             // 
             this.openCurrencyConv.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.openCurrencyConv.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCurrencyConv.Location = new System.Drawing.Point(285, 201);
+            this.openCurrencyConv.Location = new System.Drawing.Point(259, 203);
             this.openCurrencyConv.Name = "openCurrencyConv";
             this.openCurrencyConv.Size = new System.Drawing.Size(97, 41);
             this.openCurrencyConv.TabIndex = 23;
@@ -329,7 +331,7 @@ namespace Calculator_GUI
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(285, 155);
+            this.button5.Location = new System.Drawing.Point(259, 157);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(43, 41);
             this.button5.TabIndex = 24;
@@ -343,7 +345,7 @@ namespace Calculator_GUI
             this.outHistory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.outHistory.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.outHistory.ForeColor = System.Drawing.SystemColors.Window;
-            this.outHistory.Location = new System.Drawing.Point(388, 23);
+            this.outHistory.Location = new System.Drawing.Point(362, 25);
             this.outHistory.Name = "outHistory";
             treeNode1.Checked = true;
             treeNode1.Name = "prevOutputs";
@@ -357,11 +359,37 @@ namespace Calculator_GUI
             this.outHistory.TabIndex = 25;
             this.outHistory.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.outHistory_AfterSelect);
             // 
+            // historyClear
+            // 
+            this.historyClear.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.historyClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.historyClear.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.historyClear.Location = new System.Drawing.Point(489, 221);
+            this.historyClear.Name = "historyClear";
+            this.historyClear.Size = new System.Drawing.Size(49, 24);
+            this.historyClear.TabIndex = 26;
+            this.historyClear.Text = "RESET";
+            this.historyClear.UseVisualStyleBackColor = false;
+            this.historyClear.Click += new System.EventHandler(this.historyClear_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.label1.Location = new System.Drawing.Point(12, 248);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(164, 13);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Calculator-GUI by Isaac Preyser";
+            this.label1.Click += new System.EventHandler(this.label1_Click_1);
+            // 
             // CalcWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(576, 285);
+            this.ClientSize = new System.Drawing.Size(556, 273);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.historyClear);
             this.Controls.Add(this.outHistory);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.openCurrencyConv);
@@ -425,6 +453,8 @@ namespace Calculator_GUI
         private System.Windows.Forms.Button openCurrencyConv;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TreeView outHistory;
+        private System.Windows.Forms.Button historyClear;
+        private System.Windows.Forms.Label label1;
     }
 }
 

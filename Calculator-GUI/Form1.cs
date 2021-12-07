@@ -61,6 +61,7 @@ namespace Calculator_GUI
 {
     public partial class CalcWindow : Form
     {
+        //globals
 
         Random rand = new Random();
 
@@ -75,7 +76,10 @@ namespace Calculator_GUI
 
         bool firstRun = true;
 
+        bool clrHistOnNextNum = false;
+
         string outString = ""; //used for history outputs  
+
         //should look like: 
         /*
          * Read: pendingOps[i] .... == '+'
@@ -256,6 +260,10 @@ namespace Calculator_GUI
                             //reset neg number button
                             isNumNeg = false;
                             negButton.BackColor = Color.Transparent;
+                            if (clrHistOnNextNum == true)
+                            {
+                                outHistory.Nodes.Clear();
+                            }
                             outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
                             outHistory.ExpandAll();
                             outString = "";
@@ -621,6 +629,10 @@ namespace Calculator_GUI
 
             double result = Math.Pow(workingNmbr, 2);
             outString = $"sqr(" + workingNmbr + ")=" + result;
+            if (clrHistOnNextNum == true)
+            {
+                outHistory.Nodes.Clear();
+            }
             outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
             outHistory.ExpandAll();
             //ripped from case '=' in calculate
@@ -657,6 +669,10 @@ namespace Calculator_GUI
 
             //ripped from case '=' in calculate
             outString = $"RNG = " + result;
+            if (clrHistOnNextNum == true)
+            {
+                outHistory.Nodes.Clear();
+            }
             outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
             outHistory.ExpandAll();
             output.Text = Convert.ToString(result);
@@ -677,6 +693,10 @@ namespace Calculator_GUI
 
             //ripped from case '=' in calculate
             outString = $"Pi = " + result;
+            if (clrHistOnNextNum == true)
+            {
+                outHistory.Nodes.Clear();
+            }
             outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
             outHistory.ExpandAll();
 
@@ -724,6 +744,10 @@ namespace Calculator_GUI
             //using a decimal as a means to store larger numbers (96-bit decimal comapared to 64-bit long)
             decimal result = n; //this easily leads to integer overflows, could implement system.numerics datatype BigInt to have theoreticaly infinite room, at the cost of more memory usage.   
             outString = $""+workingNmbr+"! = " + result;
+            if (clrHistOnNextNum == true)
+            {
+                outHistory.Nodes.Clear();
+            }
             outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
             outHistory.ExpandAll();
             //ripped from case '=' in calculate
@@ -743,15 +767,35 @@ namespace Calculator_GUI
         {
             string selectedHistory = Convert.ToString(e.Node.Text).Trim('{', '}');
             string[] trimmed = selectedHistory.Split(' ');
-            float selected = Single.Parse(trimmed.Last());
-            inputtedNumber.Clear();
-            output.Text = trimmed.Last(); //note if you want to begin a new calculation using a saved number, YOU MUST PRESS CLEAR.
-            savedNumbers.Add(selected);
+
+            try{    
+                float selected = Single.Parse(trimmed.Last());
+                inputtedNumber.Clear();
+                output.Text = trimmed.Last(); //note if you want to begin a new calculation using a saved number, YOU MUST PRESS CLEAR.
+                savedNumbers.Add(selected);
+            }
+            catch
+            {
+                output.Text= "An error occured. Please try your calculation again.";
+                ClearLists();
+            }
+            
 
 
 
         }
 
-  
+        private void historyClear_Click(object sender, EventArgs e)
+        {
+            outHistory.Nodes.Clear();
+            outHistory.Nodes.Add("Cleared!");
+            clrHistOnNextNum = true;    
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+      
     }
 }
