@@ -30,17 +30,23 @@
 //TODO make said identifier toggleable by the user- e.g. allow the user to turn it on, and reset it without having the click CLR. **DONE**
 
 //TODO make a new method to clear the lists. this is purely quality of life. **DONE**
-
 //TODO add extended math functions. **DONE**
 //-----^^ DONE ^^---------- vv TODO vv --------------------------
 
 //TODO: add sin, cos, tan **this would be worthless without a decimal button** 
+//TODO: add a decimanl button. 
+/*possible implementations:
+ * add a button that parses existing values before the decimal and save it to a string. add the next inputted values to the string, after a "." . e.g: input:: 1234, button decimal pressed, save 1234 in a string, add a period/decimal. reflect in the outputlabel. continue accepting inputs, but change the way inputted number is parsed to allow decimals, potenitally using sinlge.parse when complete and op is inputted concat inputted number to saved int and place after the decimal. parse. 
+ * 
+ * 
+ */
 //TODO: add a decimal input button. **note this would be a headache to implement because I would have to parse out the decimal point, figure out where it is, and figure out a way to place in the point in the float at the right spot. Maybe I could try multiplying by base 10 values eg 1, .1, .01, .001 etc**
 
 //TODO: implement try/catch to catch unhandled exceptions, and prompt the user to try inputting their calculation again. With WinForms, I am hesitant to put in this work, as the math functions seems to hold their own against things like dividing by 0. 
 //TODO: look at ways to port the program to other platforms. **note mono c# transpiler is wildly outdated and does not support many of the newish features I use in this calculator)**
 //POSSIBILTITY: Look at reconfiguring the list to hold tuples, that then hold numbers along with their respective ops. This would increase performance, as it would cut the time looking in the lists. However, no person in their right mind is going to try to shove a billion operations down the program in one go, thus reducing the benefits of cutting the big O notation down. This also would increase reliability, as it would reduce the likelihood that an extra number or op gets put into the list. 
 //POSSIBILITY: Look at creating  my own data type to bundle together ops and values into one list. 
+//POSSIBILITY: Look at reconfiguring the front-end to use WPF instead of WinForms. WPF would require more XML-based knowledge, but this edges ever closer to flutter and other front-end tools so it's better for the industry. However, this comes at the drawback of lost compatability, as it would require .NET 3 or above- alienating platforms below Windows XP SP2. 
 
 
 using System;
@@ -138,7 +144,7 @@ namespace Calculator_GUI
 
             bool numListCheck = false;
 
-            foreach (var value in inputtedNumber) 
+            foreach (var value in inputtedNumber) /* lmao this implementation is funny and I was mega small brain 2*/
             {
                 concatList += Convert.ToString(value);
 
@@ -223,7 +229,7 @@ namespace Calculator_GUI
                             workingNumber = savedNumbers[a] + savedNumbers[b];
                             outString += $" + " + savedNumbers[b];
                             savedNumbers.Remove(b);
-                            savedNumbers.Insert(b, workingNumber); //insert now worked on number in the location of b, which will be a on the next time through. This allows for operations such as 4 + 5 + 6, by going 4 + 5 = 9, and then 9 + 6 = 15.
+                            savedNumbers.Insert(b, workingNumber); //insert now worked on number in the location of b, which will be a on the next time through. This allows for operations such as 4 + 5 + 6, by going 4 + 5 = 9, and then 9 + 6 = 15. e.g. savednums: [0] = 4, [1] = 5, [2] = 6, go [0] + [1], save out to [1], then increment so [1] takes the spot of [0], and a new number fills for [1]. 
                             break;
                         case '-':
                             workingNumber = savedNumbers[a] - savedNumbers[b];
