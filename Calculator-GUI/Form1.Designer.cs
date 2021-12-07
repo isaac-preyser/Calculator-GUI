@@ -59,6 +59,10 @@ namespace Calculator_GUI
             this.outHistory = new System.Windows.Forms.TreeView();
             this.historyClear = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.insertDecimal = new System.Windows.Forms.Button();
+            this.sinButton = new System.Windows.Forms.Button();
+            this.cosButton = new System.Windows.Forms.Button();
+            this.tanButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // nmbr1
@@ -174,9 +178,9 @@ namespace Calculator_GUI
             // operEquals
             // 
             this.operEquals.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.operEquals.Location = new System.Drawing.Point(63, 204);
+            this.operEquals.Location = new System.Drawing.Point(112, 204);
             this.operEquals.Name = "operEquals";
-            this.operEquals.Size = new System.Drawing.Size(92, 41);
+            this.operEquals.Size = new System.Drawing.Size(43, 41);
             this.operEquals.TabIndex = 10;
             this.operEquals.Text = "=";
             this.operEquals.UseVisualStyleBackColor = true;
@@ -264,7 +268,7 @@ namespace Calculator_GUI
             // sqrtButton
             // 
             this.sqrtButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sqrtButton.Location = new System.Drawing.Point(210, 110);
+            this.sqrtButton.Location = new System.Drawing.Point(210, 157);
             this.sqrtButton.Name = "sqrtButton";
             this.sqrtButton.Size = new System.Drawing.Size(43, 41);
             this.sqrtButton.TabIndex = 18;
@@ -275,7 +279,7 @@ namespace Calculator_GUI
             // buttonSqr
             // 
             this.buttonSqr.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSqr.Location = new System.Drawing.Point(210, 157);
+            this.buttonSqr.Location = new System.Drawing.Point(210, 110);
             this.buttonSqr.Name = "buttonSqr";
             this.buttonSqr.Size = new System.Drawing.Size(43, 41);
             this.buttonSqr.TabIndex = 19;
@@ -322,7 +326,7 @@ namespace Calculator_GUI
             this.openCurrencyConv.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openCurrencyConv.Location = new System.Drawing.Point(259, 203);
             this.openCurrencyConv.Name = "openCurrencyConv";
-            this.openCurrencyConv.Size = new System.Drawing.Size(97, 41);
+            this.openCurrencyConv.Size = new System.Drawing.Size(92, 41);
             this.openCurrencyConv.TabIndex = 23;
             this.openCurrencyConv.Text = "Currency";
             this.openCurrencyConv.UseVisualStyleBackColor = true;
@@ -383,11 +387,59 @@ namespace Calculator_GUI
             this.label1.Text = "Calculator-GUI by Isaac Preyser";
             this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
+            // insertDecimal
+            // 
+            this.insertDecimal.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.insertDecimal.Location = new System.Drawing.Point(63, 204);
+            this.insertDecimal.Name = "insertDecimal";
+            this.insertDecimal.Size = new System.Drawing.Size(43, 41);
+            this.insertDecimal.TabIndex = 28;
+            this.insertDecimal.Text = ".";
+            this.insertDecimal.UseVisualStyleBackColor = true;
+            this.insertDecimal.Click += new System.EventHandler(this.insertDecimal_Click);
+            // 
+            // sinButton
+            // 
+            this.sinButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sinButton.Location = new System.Drawing.Point(308, 62);
+            this.sinButton.Name = "sinButton";
+            this.sinButton.Size = new System.Drawing.Size(43, 41);
+            this.sinButton.TabIndex = 29;
+            this.sinButton.Text = "sin";
+            this.sinButton.UseVisualStyleBackColor = true;
+            this.sinButton.Click += new System.EventHandler(this.sinButton_Click);
+            // 
+            // cosButton
+            // 
+            this.cosButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cosButton.Location = new System.Drawing.Point(308, 109);
+            this.cosButton.Name = "cosButton";
+            this.cosButton.Size = new System.Drawing.Size(43, 41);
+            this.cosButton.TabIndex = 30;
+            this.cosButton.Text = "cos ";
+            this.cosButton.UseVisualStyleBackColor = true;
+            this.cosButton.Click += new System.EventHandler(this.cosButton_Click);
+            // 
+            // tanButton
+            // 
+            this.tanButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tanButton.Location = new System.Drawing.Point(308, 156);
+            this.tanButton.Name = "tanButton";
+            this.tanButton.Size = new System.Drawing.Size(43, 41);
+            this.tanButton.TabIndex = 31;
+            this.tanButton.Text = "tan";
+            this.tanButton.UseVisualStyleBackColor = true;
+            this.tanButton.Click += new System.EventHandler(this.tanButton_Click);
+            // 
             // CalcWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(556, 273);
+            this.Controls.Add(this.tanButton);
+            this.Controls.Add(this.cosButton);
+            this.Controls.Add(this.sinButton);
+            this.Controls.Add(this.insertDecimal);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.historyClear);
             this.Controls.Add(this.outHistory);
@@ -455,6 +507,10 @@ namespace Calculator_GUI
         private System.Windows.Forms.TreeView outHistory;
         private System.Windows.Forms.Button historyClear;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button insertDecimal;
+        private System.Windows.Forms.Button sinButton;
+        private System.Windows.Forms.Button cosButton;
+        private System.Windows.Forms.Button tanButton;
     }
 }
 

@@ -76,6 +76,8 @@ namespace Calculator_GUI
         List<float> savedNumbers = new List<float>();   //this list contains formatted numbers the computer can use in calculations. these numbers are derived from the inputtedNumber by essentially concatenating all the numbers. 
         List<char> pendingOperations = new List<char>();    //this list contains the operations that need to be conducted. The idea behind this is that item 0 of saved numbers will have a corresponding operation at item 0 of this list. Upon clicking equals, the computer will load the first operation, i.e. add, and then load the first and second numbers. it will then perform that operation. then, if there is another operation, it will load the output of the previous operation, and perform it with the next saved number. this chain will repeat until there are no more operations to carry out. 
 
+        char[] charArr;
+
         bool clrOnNum = false;
 
         bool isNumNeg = false; //used to check if the negative number button has been clicked. 
@@ -84,7 +86,10 @@ namespace Calculator_GUI
 
         bool clrHistOnNextNum = false;
 
+        bool hasDecimalBeenInserted = false;
+
         string outString = ""; //used for history outputs  
+
 
         //should look like: 
         /*
@@ -136,7 +141,7 @@ namespace Calculator_GUI
 
         }
 
-        public void ParseNumber(char oper)
+        public void ParseNumber(char oper) /* some of the code in here is redundant */
         {
             clrOnNum = false; //reset clrOnNum
 
@@ -144,10 +149,13 @@ namespace Calculator_GUI
 
             bool numListCheck = false;
 
-            foreach (var value in inputtedNumber) /* lmao this implementation is funny and I was mega small brain 2*/
-            {
-                concatList += Convert.ToString(value);
 
+            foreach (var value in charArr) /* lmao this implementation is funny and I was mega small brain 2*/
+            {
+                if (value == '1' || value == '2' || value == '3' || value == '4' || value == '5' || value == '6' || value == '7' || value == '8' || value == '9' || value == '0' || value == '.' )
+                {
+                    concatList += Convert.ToString(value);
+                }
             }
 
             float numToAdd = 0;
@@ -172,6 +180,7 @@ namespace Calculator_GUI
             }
              pendingOperations.Add(oper); //saves operation to the op list for calculation later, in this case the final operation.
             inputtedNumber.Clear();
+            hasDecimalBeenInserted = false;
         }
 
 
@@ -228,31 +237,31 @@ namespace Calculator_GUI
                         case '+':
                             workingNumber = savedNumbers[a] + savedNumbers[b];
                             outString += $" + " + savedNumbers[b];
-                            savedNumbers.Remove(b);
+                            savedNumbers.RemoveAt(b);
                             savedNumbers.Insert(b, workingNumber); //insert now worked on number in the location of b, which will be a on the next time through. This allows for operations such as 4 + 5 + 6, by going 4 + 5 = 9, and then 9 + 6 = 15. e.g. savednums: [0] = 4, [1] = 5, [2] = 6, go [0] + [1], save out to [1], then increment so [1] takes the spot of [0], and a new number fills for [1]. 
                             break;
                         case '-':
                             workingNumber = savedNumbers[a] - savedNumbers[b];
                             outString += $" - " + savedNumbers[b]; 
-                            savedNumbers.Remove(b);
+                            savedNumbers.RemoveAt(b);
                             savedNumbers.Insert(b, workingNumber);
                             break;
                         case 'x':
                             workingNumber = savedNumbers[a] * savedNumbers[b];
                             outString += $" x " + savedNumbers[b];
-                            savedNumbers.Remove(b);
+                            savedNumbers.RemoveAt(b);
                             savedNumbers.Insert(b, workingNumber);
                             break;
                         case '/':
                             workingNumber = savedNumbers[a] / savedNumbers[b];
                             outString += $" / " + savedNumbers[b];
-                            savedNumbers.Remove(b);
+                            savedNumbers.RemoveAt(b);
                             savedNumbers.Insert(b, workingNumber);
                             break;
                         case '^':
                             workingNumber = Convert.ToSingle(Math.Pow(Convert.ToDouble(savedNumbers[a]), Convert.ToDouble(savedNumbers[b])));
                             outString += $" ^ " + savedNumbers[b];
-                            savedNumbers.Remove(b);
+                            savedNumbers.RemoveAt(b);
                             savedNumbers.Insert(b, workingNumber);
                             break;
                         case '=':
@@ -273,6 +282,7 @@ namespace Calculator_GUI
                             outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
                             outHistory.ExpandAll();
                             outString = "";
+                            hasDecimalBeenInserted = false;
                             break;
 
                     }
@@ -473,12 +483,13 @@ namespace Calculator_GUI
             //local vars
             char op = '=';
 
+            charArr = output.Text.ToArray();
             output.Text = $"{op}";
             output.Refresh();
             ParseNumber(op);
             Calculate(op);
             pendingOperations.Clear(); //has to be done after the foreach loop that depends on pendingOperations, to be safe. 
-            Console.WriteLine("equals done"); //done for debugging, remove later. 
+            Console.WriteLine("equals done"); //done for debugging, RemoveAt later. 
 
 
         }
@@ -488,6 +499,7 @@ namespace Calculator_GUI
             //local vars
             char op = '+';
 
+            charArr = output.Text.ToArray(); //put number into charArr for parsing later, before the op is added to the screen. 
             output.Text = $"{op}";
             output.Refresh();
             ParseNumber(op);
@@ -499,6 +511,7 @@ namespace Calculator_GUI
             //local vars
             char op = '-';
 
+            charArr = output.Text.ToArray();
             output.Text = $"{op}";
             output.Refresh();
             ParseNumber(op);
@@ -509,7 +522,8 @@ namespace Calculator_GUI
         {
             //local vars
             char op = 'x';
-            
+
+            charArr = output.Text.ToArray();
             output.Text = $"{op}";
             output.Refresh();
             ParseNumber(op);
@@ -519,8 +533,8 @@ namespace Calculator_GUI
         {
             //local vars
             char op = '/';
-            
-            
+
+            charArr = output.Text.ToArray();
             output.Text = $"{op}";
             output.Refresh();
             ParseNumber(op);
@@ -623,6 +637,7 @@ namespace Calculator_GUI
                              //reset neg number button
             isNumNeg = false;
             negButton.BackColor = Color.Transparent;
+            hasDecimalBeenInserted = false;
         }
 
         private void buttonSqr_Click(object sender, EventArgs e)
@@ -652,6 +667,7 @@ namespace Calculator_GUI
                              //reset neg number button
             isNumNeg = false;
             negButton.BackColor = Color.Transparent;
+            hasDecimalBeenInserted = false;
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -690,6 +706,7 @@ namespace Calculator_GUI
                              //reset neg number button
             isNumNeg = false;
             negButton.BackColor = Color.Transparent;
+            hasDecimalBeenInserted = false;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -715,6 +732,7 @@ namespace Calculator_GUI
                              //reset neg number button
             isNumNeg = false;
             negButton.BackColor = Color.Transparent;
+            hasDecimalBeenInserted = false;
         }
 
         private void openCurrencyConv_Click(object sender, EventArgs e)
@@ -767,6 +785,7 @@ namespace Calculator_GUI
                              //reset neg number button
             isNumNeg = false;
             negButton.BackColor = Color.Transparent;
+            hasDecimalBeenInserted = false;
         }
 
         private void outHistory_AfterSelect(object sender, TreeViewEventArgs e)
@@ -802,6 +821,104 @@ namespace Calculator_GUI
         {
 
         }
-      
+
+        private void insertDecimal_Click(object sender, EventArgs e)
+        {
+            if (hasDecimalBeenInserted == false)
+            {
+                output.Text += '.';
+                hasDecimalBeenInserted = true;
+            }
+        }
+
+        private void sinButton_Click(object sender, EventArgs e)
+        {
+            float workingNmbr = 0;
+            if (output.Text.Length > 0)
+            {
+                workingNmbr = Single.Parse(output.Text);
+            }
+
+            double result = Math.Sin(workingNmbr);
+            outString = $"sin(" + workingNmbr + ")=" + result;
+            if (clrHistOnNextNum == true)
+            {
+                outHistory.Nodes.Clear();
+            }
+            outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
+            outHistory.ExpandAll();
+            //ripped from case '=' in calculate
+
+            output.Text = Convert.ToString(result);
+            savedNumbers.Clear();
+            savedNumbers.Add(Convert.ToSingle(result));    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
+            inputtedNumber.Clear();
+            output.Refresh();
+            clrOnNum = true; //setup for auto-clearing if user begins inputting a new calculation immediately. 
+                             //reset neg number button
+            isNumNeg = false;
+            negButton.BackColor = Color.Transparent;
+            hasDecimalBeenInserted = false;
+        }
+
+        private void cosButton_Click(object sender, EventArgs e)
+        {
+            float workingNmbr = 0;
+            if (output.Text.Length > 0)
+            {
+                workingNmbr = Single.Parse(output.Text);
+            }
+
+            double result = Math.Cos(workingNmbr);
+            outString = $"cos(" + workingNmbr + ")=" + result;
+            if (clrHistOnNextNum == true)
+            {
+                outHistory.Nodes.Clear();
+            }
+            outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
+            outHistory.ExpandAll();
+            //ripped from case '=' in calculate
+
+            output.Text = Convert.ToString(result);
+            savedNumbers.Clear();
+            savedNumbers.Add(Convert.ToSingle(result));    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
+            inputtedNumber.Clear();
+            output.Refresh();
+            clrOnNum = true; //setup for auto-clearing if user begins inputting a new calculation immediately. 
+                             //reset neg number button
+            isNumNeg = false;
+            negButton.BackColor = Color.Transparent;
+            hasDecimalBeenInserted = false;
+        }
+
+        private void tanButton_Click(object sender, EventArgs e)
+        {
+            float workingNmbr = 0;
+            if (output.Text.Length > 0)
+            {
+                workingNmbr = Single.Parse(output.Text);
+            }
+
+            double result = Math.Tan(workingNmbr);
+            outString = $"tan(" + workingNmbr + ")=" + result;
+            if (clrHistOnNextNum == true)
+            {
+                outHistory.Nodes.Clear();
+            }
+            outHistory.Nodes.Add(new TreeNode(Convert.ToString(outString)));
+            outHistory.ExpandAll();
+            //ripped from case '=' in calculate
+
+            output.Text = Convert.ToString(result);
+            savedNumbers.Clear();
+            savedNumbers.Add(Convert.ToSingle(result));    //clears savedNumbers, and saves the output as the first number, so one could go 1+1 = 2, and then go +3 = and recieve 5. TODO: add a CLEAR button.
+            inputtedNumber.Clear();
+            output.Refresh();
+            clrOnNum = true; //setup for auto-clearing if user begins inputting a new calculation immediately. 
+                             //reset neg number button
+            isNumNeg = false;
+            negButton.BackColor = Color.Transparent;
+            hasDecimalBeenInserted = false;
+        }
     }
 }
